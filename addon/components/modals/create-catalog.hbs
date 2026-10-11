@@ -11,6 +11,7 @@
                 @optionValue="value"
                 @optionLabel="label"
                 @onSelect={{fn (mut @options.catalog.status)}}
+                @disabled={{cannot @options.writePermission}}
             />
         </InputGroup>
         <InputGroup>
@@ -18,7 +19,7 @@
                 <div class="mb-2 flex justify-between">
                     <div class="text-sm font-semibold dark:text-gray-100">{{t "storefront.catalog-list.product-catalog"}}</div>
                     <div>
-                        <Button @icon="plus" @text={{t "storefront.catalog-list.add-category"}} @onClick={{@options.createCategory}} />
+                        <Button @icon="plus" @text={{t "storefront.catalog-list.add-category"}} @onClick={{@options.createCategory}} @permission={{@options.writePermission}} />
                     </div>
                 </div>
                 <div class="space-y-2">
@@ -39,9 +40,9 @@
                                         @helpText={{t "storefront.catalog-list.toggle-category"}}
                                         @size="xs"
                                     />
-                                    <Button @icon="tags" @onClick={{fn @options.addProducts category}} @helpText={{t "storefront.catalog-list.manage-category-products"}} @size="xs" />
-                                    <Button @icon="pencil" @onClick={{fn @options.editCategory category}} @helpText={{t "storefront.catalog-list.edit-category-name"}} @size="xs" />
-                                    <Button @type="danger" @icon="trash" @onClick={{fn @options.deleteCategory category}} @helpText={{t "storefront.catalog-list.delete-category"}} @size="xs" />
+                                    <Button @icon="tags" @onClick={{fn @options.addProducts category}} @helpText={{t "storefront.catalog-list.manage-category-products"}} @size="xs" @permission={{@options.writePermission}} />
+                                    <Button @icon="pencil" @onClick={{fn @options.editCategory category}} @helpText={{t "storefront.catalog-list.edit-category-name"}} @size="xs" @permission={{@options.writePermission}} />
+                                    <Button @type="danger" @icon="trash" @onClick={{fn @options.deleteCategory category}} @helpText={{t "storefront.catalog-list.delete-category"}} @size="xs" @permission="storefront delete catalog-category" />
                                 </div>
                             </div>
                             {{#if category.expanded}}
@@ -57,12 +58,12 @@
                                                 @onChange={{fn @options.confirmSelectedProducts category}}
                                             />
                                             <div class="mt-2">
-                                                <Button @icon="check" @type="primary" @text={{t "storefront.catalog-list.done"}} @onClick={{fn @options.finishAddingProducts category}} />
+                                                <Button @icon="check" @type="primary" @text={{t "storefront.catalog-list.done"}} @onClick={{fn @options.finishAddingProducts category}} @permission={{@options.writePermission}} />
                                             </div>
                                         </div>
                                     {{else}}
                                         <div class="flex flex-row mb-2">
-                                            <Button @icon="edit" @text={{t "storefront.catalog-list.edit-products"}} @onClick={{fn @options.addProducts category}} @size="xs" />
+                                            <Button @icon="edit" @text={{t "storefront.catalog-list.edit-products"}} @onClick={{fn @options.addProducts category}} @size="xs" @permission={{@options.writePermission}} />
                                         </div>
                                         <div class="grid grid-cols-4 gap-2">
                                             {{#each category.products as |product|}}
@@ -73,7 +74,7 @@
                                                         <div class="text-sm truncate dark:text-gray-200">{{n-a product.description}}</div>
                                                         <div class="text-sm dark:text-gray-200">{{format-currency product.price product.currency}}</div>
                                                         <div class="mt-2">
-                                                            <Button @type="danger" @icon="trash" @text={{t "storefront.catalog-list.remove"}} @onClick={{fn @options.removeProduct category product}} @size="xs" />
+                                                            <Button @type="danger" @icon="trash" @text={{t "storefront.catalog-list.remove"}} @onClick={{fn @options.removeProduct category product}} @size="xs" @permission={{@options.writePermission}} />
                                                         </div>
                                                     </div>
                                                 </div>
