@@ -26,7 +26,7 @@ storefront:
     driver: Motorista
     dropoff: Entrega
     earning: Ganhos
-    email: Email
+    email: E-mail
     export: Exportar
     id: ID
     internal-id: ID Interno
@@ -82,6 +82,7 @@ storefront:
     customers: Clientes
     orders: Pedidos
     networks: Redes
+    promotions: Promoções
     settings: Configurações
     launch-app: Abrir App
   component:
@@ -162,6 +163,17 @@ storefront:
         key-text: Esta é a chave do seu canal de notificação, use-a para especificar
           quais aplicativos devem utilizar este canal de notificação via configurações
           do SDK.
+        environment-help-text: O modo automático tenta primeiro produção e, se a Apple rejeitar
+          o token do dispositivo, tenta novamente em sandbox (builds de desenvolvimento).
+        android-channel-id-help-text: ID opcional do canal de notificação Android. Deixe em
+          branco para usar o canal padrão do aplicativo.
+      test-notification-channel:
+        token: Token do dispositivo
+        token-text: Cole um token de registro FCM (Android) ou um token de dispositivo APNs
+          (iOS) de um aparelho com o seu aplicativo instalado.
+        environment: Ambiente APNs
+        environment-text: Deixe em branco para tentar os ambientes configurados no canal.
+        result: Resultado do provedor
       create-product-category:
         name: Nome da categoria
         name-text: Digite um nome para a categoria
@@ -248,7 +260,7 @@ storefront:
       customers:
         widget-title: Clientes Recentes
         phone: Telefone
-        email: Email
+        email: E-mail
       orders:
         widget-title: Pedidos Recentes
         id-column: ID do Pedido
@@ -382,7 +394,7 @@ storefront:
             contact-social-panel:
               panel-title: Contato & Social
               phone: Telefone
-              email: Email
+              email: E-mail
               email-help-text: O email do seu negócio.
               website: Site
               website-help-text: URL do site do seu negócio.
@@ -412,6 +424,10 @@ storefront:
               tax-percentage-input-label: Percentual de Imposto
               tax-percentage-input-help-text: Percentual do imposto sobre vendas a
                 ser aplicado aos pedidos.
+              enable-minimum-order-amount: Ativar valor mínimo do pedido
+              minimum-order-amount-input-label: Valor Mínimo do Pedido
+              minimum-order-amount-input-help-text: O valor mínimo do pedido exigido para finalizar
+                a compra.
               auto-accept-incoming-orders: Aceitar automaticamente pedidos recebidos
               auto-dispatch-orders: Despachar pedidos automaticamente
               require-proof-of-delivery: Exigir comprovante de entrega
@@ -521,7 +537,7 @@ storefront:
         delete-order: Excluir Pedido
         activity: Atividade
         unable-load-order-activity: Não foi possível carregar a atividade do pedido
-        ad-hoc: Ad-Hoc
+        ad-hoc: Avulso
         customer: Cliente
         facilitator: Facilitador
         driver-assigned: Motorista Atribuído
@@ -679,6 +695,10 @@ storefront:
       tax-percentage: Porcentagem do imposto
       tax-percentage-help-text: A porcentagem do imposto sobre vendas a ser aplicada
         aos pedidos.
+      enable-minimum-order-amount: Ativar valor mínimo do pedido
+      minimum-order-amount: Valor Mínimo do Pedido
+      minimum-order-amount-help-text: O valor mínimo do pedido exigido para finalizar a
+        compra.
       auto-accept-incoming-order: Aceitar automaticamente pedidos recebidos
       auto-dispatch-order: Despachar pedidos automaticamente
       require-proof-of-delivery: Exigir comprovante de entrega
@@ -723,6 +743,12 @@ storefront:
       notification-storefront: Configure os canais de notificação para sua vitrine,
         cada canal de notificação pode ter suas próprias regras e opções.
       new-channel: Novo canal
+      send-test: Enviar teste
+      send-test-push: Enviar uma notificação push de teste
+      send-test-push-button: Enviar push de teste
+      test-push-sent: A notificação push de teste foi entregue ao provedor.
+      test-push-failed: A notificação push de teste falhou; veja o resultado do provedor
+        abaixo.
   service:
     storefront:
       new-incoming-order: Você tem um novo pedido chegando!
@@ -734,3 +760,256 @@ storefront:
       storefront-create-success: Sua nova vitrine foi criada!
   application:
     launch-app: Abrir aplicativo
+  promotions:
+    title: Promoções
+    push-notifications:
+      tab-title: Notificações Push
+      header: Enviar Notificações Push
+      description: Envie notificações push promocionais para seus clientes
+      title-label: Título da Notificação
+      title-placeholder: Digite o título da notificação
+      title-help-text: O título que aparecerá na notificação push
+      body-label: Texto da Notificação
+      body-placeholder: Digite a mensagem da notificação
+      body-help-text: O conteúdo da mensagem que será enviada aos clientes
+      select-all-customers: Selecionar Todos os Clientes
+      select-all-customers-help-text: Enviar a notificação para todos os clientes desta
+        loja
+      customers-label: Selecionar Clientes
+      customers-placeholder: Selecione os clientes que receberão a notificação
+      send-button: Enviar Notificação
+      validation-title-body-required: Informe o título e o texto da notificação
+      validation-customers-required: Selecione pelo menos um cliente para receber a
+        notificação
+      notification-sent-success: Notificação push enviada com sucesso aos clientes selecionados
+      notification-sent-error: Falha ao enviar a notificação push. Tente novamente.
+    common:
+      new: Novo
+      edit: Editar
+      delete: Excluir
+      save: Salvar
+      cancel: Cancelar
+      name: Nome
+      description: Descrição
+      status: Status
+      created: Criado
+      updated: Atualizado
+      none: Nenhum
+      all-customers: Todos os clientes
+      done: Concluído
+      no-results: Nenhum resultado encontrado
+      no-results-help: Tente outra busca ou volte para a lista completa.
+      reset-filters: Mostrar todos
+    statuses:
+      draft: Rascunho
+      active: Ativa
+      paused: Pausada
+      ended: Encerrada
+      scheduled: Agendada
+      sending: Enviando
+      sent: Enviada
+      canceled: Cancelada
+    list:
+      tab-title: Promoções
+      header: Promoções
+      new-promotion: Nova promoção
+      edit-promotion: Editar promoção
+      type: Tipo
+      trigger: Ativação
+      runs: Período
+      redemptions: Resgates
+      discount-given: Desconto concedido
+      actions: Ações da promoção
+      manage-codes: Gerenciar códigos
+      announce: Anunciar aos clientes
+      activate: Ativar
+      pause: Pausar
+      end: Encerrar promoção
+      created-success: Promoção criada.
+      saved-success: Promoção salva.
+      status-updated: Status da promoção atualizado.
+      empty: Nenhuma promoção ainda. Crie uma para oferecer descontos na finalização
+        da compra.
+      search-placeholder: Buscar promoções...
+      empty-title: Nenhuma promoção ainda
+      empty-help: Crie uma promoção para oferecer descontos na finalização da compra.
+    types:
+      percentage: Desconto percentual
+      fixed_amount: Desconto em valor
+      free_delivery: Entrega grátis
+      bogo: Compre X, leve Y
+    triggers:
+      automatic: Automática
+      code: Cupom
+    form:
+      basics: Informações Básicas
+      name-placeholder: 'ex.: Oferta de fim de semana'
+      name-help: Exibido aos clientes na finalização da compra e no aplicativo.
+      description-placeholder: Descreva a oferta e as condições
+      description-help: Detalhes opcionais exibidos com a oferta no aplicativo.
+      type-help: Como o desconto é calculado.
+      trigger-help: Promoções automáticas valem para todo carrinho elegível; promoções
+        por cupom exigem um código promocional.
+      percent-off: Percentual de desconto
+      amount-off: Valor do desconto
+      buy-quantity: Quantidade a comprar
+      get-quantity: Quantidade a levar
+      get-discount-percent: Desconto nos itens levados (%)
+      bogo-help: Para cada grupo de itens elegíveis "compre" + "leve", os itens "leve"
+        mais baratos recebem o desconto.
+      schedule: Período
+      starts-at: Começa em
+      ends-at: Termina em
+      schedule-help: Deixe o início em branco para a promoção valer assim que for ativada.
+        Deixe o fim em branco para não ter data de término.
+      conditions: Condições
+      min-subtotal: Gasto mínimo
+      min-items: Mínimo de itens
+      no-minimum: Sem mínimo
+      no-limit: Sem limite
+      first-order-only: Somente primeiro pedido
+      first-order-only-help: Só clientes que nunca fizeram pedido podem usar.
+      targeting: Abrangência
+      targeting-help: Limite o desconto a estes produtos ou categorias. Deixe em branco
+        para valer para o carrinho inteiro.
+      products: Produtos
+      products-placeholder: Busque e selecione produtos
+      categories: Categorias
+      categories-placeholder: Busque e selecione categorias
+      exclude-products: Produtos excluídos
+      exclude-products-placeholder: Busque produtos para excluir
+      limits: Limites
+      usage-limit: Total de usos
+      usage-limit-per-customer: Usos por cliente
+      budget-amount: Orçamento total
+      max-discount-amount: Desconto máximo por pedido
+      limits-help: Deixe em branco para não ter limite.
+      stacking: Combinação e visibilidade
+      stackable: Pode ser combinada com outras promoções
+      stackable-help: Caso contrário, ela vale sozinha, quando for o maior desconto
+        para o cliente.
+      priority: Prioridade
+      priority-help: Promoções com prioridade maior são aplicadas primeiro.
+      is-public: Mostrar nas ofertas do aplicativo
+    codes:
+      title: Cupons de {name}
+      help: Gere um lote de códigos únicos ou informe um código específico para compartilhar
+        com os clientes.
+      generate: Gerar códigos
+      count: Quantidade
+      prefix: Prefixo
+      prefix-placeholder: 'ex.: VERAO'
+      length: Tamanho do código
+      usage-limit: Usos por código
+      usage-limit-help: 1 para códigos de uso único. Deixe em branco para uso ilimitado.
+      specific-code: Ou crie um código específico
+      specific-code-placeholder: 'ex.: VERAO25'
+      specific-code-help: Quando informado, só este código é criado. A quantidade, o
+        prefixo e o tamanho acima são ignorados.
+      loading: Carregando cupons...
+      load-failed: Não foi possível carregar os cupons.
+      retry: Tentar novamente
+      code: Código
+      used: Usados
+      expires: Expira
+      disable: Desativar
+      enable: Ativar
+      generated-success: Códigos gerados.
+      empty: Nenhum código ainda.
+    announce:
+      title: Anunciar {name}
+      help: Envie uma notificação sobre esta promoção aos seus clientes. Ela é enviada
+        quando a promoção começa, ou imediatamente se já tiver começado.
+      segment: Público
+      segment-placeholder: Todos os clientes
+      message-title: Título da notificação
+      title-placeholder: 'ex.: Seu próximo pedido está em oferta'
+      message-body: Mensagem da notificação
+      body-placeholder: Conte aos clientes sobre a oferta
+      send-at: Enviar em (opcional)
+      send-at-help: Deixe em branco para enviar quando a promoção começar, ou imediatamente
+        se ela já tiver começado.
+      success: Anúncio agendado.
+    campaigns:
+      tab-title: Campanhas
+      header: Campanhas
+      new-campaign: Nova campanha
+      edit-campaign: Editar campanha
+      view-campaign: Ver campanha
+      search-placeholder: Buscar campanhas...
+      empty-title: Nenhuma campanha ainda
+      empty-help: Crie uma campanha para enviar novidades e ofertas aos seus clientes.
+      name-placeholder: 'ex.: Anúncio das ofertas de fim de semana'
+      name-help: Nome interno para ajudar sua equipe a identificar esta campanha.
+      title-placeholder: 'ex.: Suas ofertas de fim de semana chegaram'
+      body-placeholder: Escreva a mensagem que seus clientes vão receber.
+      read-only-help: Esta campanha não pode mais ser editada. A mensagem e o público
+        são exibidos para consulta.
+      audience: Público
+      audience-help: Selecione um segmento para atingir um grupo, ou deixe em branco
+        para incluir todos os clientes da sua organização.
+      channels: Canais
+      channels-help: Escolha onde os clientes devem receber esta campanha.
+      channel-push: Notificação push
+      channel-inbox: Caixa de entrada do aplicativo
+      send-at: Enviar em
+      sent-at: Enviada
+      targeted: Clientes alcançados
+      send-now: Enviar agora
+      send-now-confirm: Enviar esta campanha para o público agora?
+      cancel-campaign: Cancelar campanha
+      cancel-confirm: Cancelar esta campanha? Ela não será enviada.
+      audience-count: Esta campanha vai alcançar {count} clientes.
+      title-label: Título da notificação
+      body-label: Mensagem da notificação
+      promotion: Promoção vinculada
+      promotion-help: Tocar na notificação abre esta promoção.
+      promotion-placeholder: Selecione uma promoção (opcional)
+      link-url: Ou vincule a uma URL
+      link-help: Destino opcional quando o cliente toca na notificação.
+      link-placeholder: https://example.com/offers
+      when: Quando enviar
+      when-draft: Salvar como rascunho
+      when-now: Enviar agora
+      when-schedule: Agendar
+      required-fields: Informe o nome da campanha, o título e a mensagem da notificação.
+      required-channel: Selecione pelo menos um canal de envio.
+      required-schedule: Escolha uma data e hora futuras para esta campanha.
+      schedule-help: Selecione uma data e hora futuras no seu fuso horário.
+      saved-success: Campanha salva.
+      sent-success: Campanha enviada.
+      canceled-success: Campanha cancelada.
+      empty: Nenhuma campanha ainda.
+    segments:
+      tab-title: Segmentos
+      header: Segmentos de clientes
+      new-segment: Novo segmento
+      edit-segment: Editar segmento
+      search-placeholder: Buscar segmentos...
+      empty-title: Nenhum segmento de clientes ainda
+      empty-help: Agrupe clientes pelo histórico de pedidos e atividade para direcionar
+        campanhas.
+      name-placeholder: 'ex.: Clientes frequentes'
+      description-placeholder: Descreva quem faz parte deste segmento (opcional).
+      rules: Regras
+      rules-help: Os clientes precisam atender a todas as regras preenchidas. Deixe
+        uma regra em branco para ignorá-la, ou todas em branco para incluir todos os
+        clientes da sua organização.
+      orders-placeholder: Sem limite de pedidos
+      days-placeholder: Sem limite de tempo
+      spend-placeholder: Sem gasto mínimo
+      min-orders: Pelo menos esta quantidade de pedidos
+      max-orders: No máximo esta quantidade de pedidos
+      ordered-within-days: Fez pedido nos últimos (dias)
+      not-ordered-within-days: Não fez pedido nos últimos (dias)
+      joined-within-days: Cadastrou-se nos últimos (dias)
+      min-spent: Gastou pelo menos
+      min-spent-help: Total mínimo de pagamentos aprovados em toda a sua organização.
+        Deixe em branco ou 0 para não ter mínimo.
+      has-push-device: Pode receber notificações push
+      matching: '{count} clientes correspondentes'
+      matching-loading: Contando clientes correspondentes...
+      matching-unavailable: A contagem de clientes está temporariamente indisponível.
+      saved-success: Segmento salvo.
+      empty: Nenhum segmento ainda. Segmentos permitem direcionar campanhas a grupos
+        de clientes.
