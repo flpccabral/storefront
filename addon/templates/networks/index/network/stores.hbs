@@ -30,8 +30,8 @@
         />
         {{#if this.categoryModel}}
             <Button @icon="arrow-left" @size="xs" @onClick={{this.categoryPicker.loadParentCategories}} />
-            <Button @icon="cog" @text="Edit Category" @size="xs" @onClick={{fn this.editCategory this.categoryModel}} />
-            <Button @icon="trash" @text="Delete Category" @size="xs" @type="danger" @onClick={{fn this.deleteCategory this.categoryModel}} />
+            <Button @icon="cog" @text={{t "storefront.network-details.edit-category"}} @size="xs" @onClick={{fn this.editCategory this.categoryModel}} />
+            <Button @icon="trash" @text={{t "storefront.network-details.delete-category"}} @size="xs" @type="danger" @onClick={{fn this.deleteCategory this.categoryModel}} />
         {{/if}}
     </div>
     <Table @rows={{@model}} @columns={{this.columns}} @selectable={{true}} @canSelectAll={{true}} @onSetup={{fn (mut this.table)}} @tfoot={{false}} @selectAllColumnWidth={{20}} />

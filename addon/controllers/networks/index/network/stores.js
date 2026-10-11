@@ -156,7 +156,7 @@ export default class NetworksIndexNetworkStoresController extends Controller {
             ddButtonText: false,
             ddButtonIcon: 'ellipsis-h',
             ddButtonIconPrefix: 'fas',
-            ddMenuLabel: 'Store Actions',
+            ddMenuLabel: this.intl.t('storefront.network-details.store-actions'),
             cellClassNames: 'overflow-visible',
             wrapperClass: 'flex items-center justify-end mx-2',
             width: '50px',
@@ -324,7 +324,7 @@ export default class NetworksIndexNetworkStoresController extends Controller {
 
                 if (selectedCategory) {
                     return this.addStoreToCategory(store, selectedCategory).then(() => {
-                        this.notifications.success(`${store.name} category was changed to ${selectedCategory.name}`);
+                        this.notifications.success(this.intl.t('storefront.network-details.store-category-changed', { storeName: store.name, categoryName: selectedCategory.name }));
                         this.hostRouter.refresh();
                     });
                 }
@@ -458,7 +458,7 @@ export default class NetworksIndexNetworkStoresController extends Controller {
                 modal.startLoading();
 
                 return category.save().then(() => {
-                    this.notifications.success(options.successMessage ?? 'Category changes saved.');
+                    this.notifications.success(options.successMessage ?? this.intl.t('storefront.network-details.category-changes-saved'));
                 });
             },
             ...options,
@@ -575,7 +575,7 @@ export default class NetworksIndexNetworkStoresController extends Controller {
                 return store
                     .save()
                     .then(() => {
-                        this.notifications.success(`Changes to ${store.name} saved.`);
+                        this.notifications.success(this.intl.t('storefront.network-details.store-changes-saved', { storeName: store.name }));
                     })
                     .catch((error) => {
                         console.error(error);
