@@ -1289,3 +1289,11 @@ storefront:
       saved-success: Segmento salvo.
       empty: Nenhum segmento ainda. Segmentos permitem direcionar campanhas a grupos
         de clientes.
+  customer-list:
+    customer-actions: "Ações do cliente"
+    edit-customer: "Editar cliente"
+    empty:
+      title: "Nenhum cliente ainda"
+      description: "Os clientes aparecem aqui assim que se cadastram ou fazem um pedido na sua loja."
+      filtered-title: "Nenhum cliente corresponde à sua pesquisa"
+      filtered-description: "Ajuste a pesquisa ou os filtros para encontrar outro cliente."

@@ -18,6 +18,11 @@ export default class CustomerPanelComponent extends Component {
     @service fetch;
 
     /**
+     * Service for translations.
+     */
+    @service intl;
+
+    /**
      * Service for managing modals.
      *
      * @type {Service}
@@ -110,7 +115,7 @@ export default class CustomerPanelComponent extends Component {
         return [
             {
                 icon: 'pencil',
-                helpText: 'Edit customer',
+                helpText: this.intl.t('storefront.customer-list.edit-customer'),
                 onClick: this.onEdit,
                 permission: 'storefront update customer',
             },

@@ -10,6 +10,14 @@
     @setupTable={{fn (mut this.table)}}
     @actionButtons={{this.actionButtons}}
     @controller={{this}}
+    @emptyStateComponent={{component
+        "table/empty-state"
+        icon="users"
+        title=(t "storefront.customer-list.empty.title")
+        description=(t "storefront.customer-list.empty.description")
+        filteredTitle=(t "storefront.customer-list.empty.filtered-title")
+        filteredDescription=(t "storefront.customer-list.empty.filtered-description")
+    }}
 />
 
 {{outlet}}

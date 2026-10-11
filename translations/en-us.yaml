@@ -1192,3 +1192,11 @@ storefront:
       matching-unavailable: Customer count is temporarily unavailable.
       saved-success: Segment saved.
       empty: No segments yet. Segments let you target campaigns at groups of customers.
+  customer-list:
+    customer-actions: "Customer Actions"
+    edit-customer: "Edit customer"
+    empty:
+      title: "No customers yet"
+      description: "Customers appear here once they sign up or place an order in your storefront."
+      filtered-title: "No customers match your search"
+      filtered-description: "Adjust the search or filters to find another customer."

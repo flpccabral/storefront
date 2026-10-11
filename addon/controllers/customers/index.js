@@ -220,7 +220,7 @@ export default class CustomersIndexController extends BaseController {
             ddButtonText: false,
             ddButtonIcon: 'ellipsis-h',
             ddButtonIconPrefix: 'fas',
-            ddMenuLabel: this.intl.t('storefront.customers.index.vendor-action'),
+            ddMenuLabel: this.intl.t('storefront.customer-list.customer-actions'),
             cellClassNames: 'overflow-visible',
             wrapperClass: 'flex items-center justify-end mx-2',
             sticky: 'right',
