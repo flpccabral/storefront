@@ -1,6 +1,9 @@
 import Component from '@glimmer/component';
+import { inject as service } from '@ember/service';
 
 export default class StorefrontProductCollectionComponent extends Component {
+    @service intl;
+
     get products() {
         return this.args.products ?? [];
     }
@@ -14,6 +17,6 @@ export default class StorefrontProductCollectionComponent extends Component {
     }
 
     get title() {
-        return this.args.category ? `${this.args.category.name} Products` : 'All Products';
+        return this.args.category ? this.intl.t('storefront.product-list.category-products', { name: this.args.category.name }) : this.intl.t('storefront.product-list.all-products');
     }
 }

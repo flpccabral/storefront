@@ -7,6 +7,7 @@ const PUBLISHED_STATUSES = ['published', 'available', 'active'];
 
 export default class StorefrontProductCardComponent extends Component {
     @service modalsManager;
+    @service intl;
 
     get imageUrl() {
         return this.args.product?.primary_image_url ?? FALLBACK_IMAGE_URL;
@@ -45,9 +46,13 @@ export default class StorefrontProductCardComponent extends Component {
         return product?.is_available === false ? 'draft' : 'published';
     }
 
+    get displayStatusLabel() {
+        return this.intl.t(`storefront.product-list.statuses.${this.displayStatus}`);
+    }
+
     @action previewImage() {
         this.modalsManager.show('modals/product-image-preview', {
-            title: this.args.product?.name ?? 'Product image',
+            title: this.args.product?.name ?? this.intl.t('storefront.product-list.product-image'),
             modalClass: 'storefront-product-image-preview-modal',
             modalBodyClass: 'storefront-product-image-preview-modal__body',
             hideFooterActions: true,

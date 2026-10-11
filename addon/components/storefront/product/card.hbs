@@ -3,9 +3,9 @@
         <LinkTo @route={{@editRoute}} @model={{@product}} class="storefront-product-row__product">
             <Image src={{this.imageUrl}} @fallbackSrc="https://flb-assets.s3.ap-southeast-1.amazonaws.com/static/image-file-icon.png" alt={{@product.name}} class="storefront-product-row__image" />
             <span class="storefront-product-row__copy">
-                <strong>{{n-a @product.name "Untitled product"}}</strong>
-                <small>{{n-a @product.description "No description"}}</small>
-                <span class="storefront-product-row__sku">{{n-a @product.sku "No SKU"}}</span>
+                <strong>{{n-a @product.name (t "storefront.product-list.untitled-product")}}</strong>
+                <small>{{n-a @product.description (t "storefront.product-list.no-description")}}</small>
+                <span class="storefront-product-row__sku">{{n-a @product.sku (t "storefront.product-list.no-sku")}}</span>
             </span>
         </LinkTo>
         <span class="storefront-product-row__price">
@@ -15,15 +15,15 @@
                 {{format-currency @product.price @product.currency}}
             {{/if}}
         </span>
-        <span><Badge @status={{this.displayStatus}} /></span>
-        <span class="storefront-product-row__muted">{{this.variantCount}} variants · {{this.addonGroupCount}} add-ons</span>
+        <span><Badge @status={{this.displayStatus}} @text={{this.displayStatusLabel}} /></span>
+        <span class="storefront-product-row__muted">{{t "storefront.product-list.variants" count=this.variantCount}} · {{t "storefront.product-list.add-ons" count=this.addonGroupCount}}</span>
         <span class="storefront-product-row__actions">
             <LinkTo
                 @route={{@editRoute}}
                 @model={{@product}}
                 disabled={{cannot "storefront update product"}}
                 class="btn btn-xs btn-default"
-                aria-label={{concat "Edit " @product.name}}
+                aria-label={{t "storefront.product-list.edit-product" name=@product.name}}
             >
                 <FaIcon @icon="pencil" />
             </LinkTo>
@@ -39,13 +39,13 @@
 {{else}}
     <div class="storefront-product-card" data-test-storefront-product-card>
         <div class="storefront-product-card__media">
-            <LinkTo @route={{@editRoute}} @model={{@product}} class="storefront-product-card__image-link" aria-label={{concat "Edit " @product.name}}>
+            <LinkTo @route={{@editRoute}} @model={{@product}} class="storefront-product-card__image-link" aria-label={{t "storefront.product-list.edit-product" name=@product.name}}>
                 <Image src={{this.imageUrl}} @fallbackSrc="https://flb-assets.s3.ap-southeast-1.amazonaws.com/static/image-file-icon.png" alt={{@product.name}} class="storefront-product-card__image" />
             </LinkTo>
             <div class="storefront-product-card__status">
-                <Badge @status={{this.displayStatus}} />
+                <Badge @status={{this.displayStatus}} @text={{this.displayStatusLabel}} />
             </div>
-            <button type="button" class="storefront-product-card__image-action" aria-label={{concat "Preview image for " @product.name}} {{on "click" this.previewImage}}>
+            <button type="button" class="storefront-product-card__image-action" aria-label={{t "storefront.product-list.preview-image" name=@product.name}} {{on "click" this.previewImage}}>
                 <FaIcon @icon="expand" />
             </button>
         </div>
@@ -53,9 +53,9 @@
         <div class="storefront-product-card__body">
             <div class="storefront-product-card__headline">
                 <div class="storefront-product-card__identity">
-                    <div class="storefront-product-card__category">{{n-a this.categoryName "Uncategorized"}}</div>
+                    <div class="storefront-product-card__category">{{n-a this.categoryName (t "storefront.product-list.uncategorized")}}</div>
                     <LinkTo @route={{@editRoute}} @model={{@product}} class="storefront-product-card__title">
-                        {{n-a @product.name "Untitled product"}}
+                        {{n-a @product.name (t "storefront.product-list.untitled-product")}}
                     </LinkTo>
                 </div>
                 <div class="storefront-product-card__price">
@@ -68,39 +68,39 @@
                 </div>
             </div>
 
-            <p class="storefront-product-card__description">{{n-a @product.description "No description"}}</p>
-            <div class="storefront-product-card__sku">{{n-a @product.sku "No SKU"}}</div>
+            <p class="storefront-product-card__description">{{n-a @product.description (t "storefront.product-list.no-description")}}</p>
+            <div class="storefront-product-card__sku">{{n-a @product.sku (t "storefront.product-list.no-sku")}}</div>
 
             <div class="storefront-product-card__meta">
-                <span><FaIcon @icon="layer-group" /> {{this.variantCount}} variants</span>
-                <span><FaIcon @icon="tags" /> {{this.addonGroupCount}} add-ons</span>
+                <span><FaIcon @icon="layer-group" /> {{t "storefront.product-list.variants" count=this.variantCount}}</span>
+                <span><FaIcon @icon="tags" /> {{t "storefront.product-list.add-ons" count=this.addonGroupCount}}</span>
             </div>
 
             <div class="storefront-product-card__flags">
                 {{#if @product.is_service}}
-                    <span><FaIcon @icon="house-leave" /> Service</span>
+                    <span><FaIcon @icon="house-leave" /> {{t "storefront.product-list.service"}}</span>
                 {{/if}}
                 {{#if @product.is_bookable}}
-                    <span><FaIcon @icon="calendar-star" /> Bookable</span>
+                    <span><FaIcon @icon="calendar-star" /> {{t "storefront.product-list.bookable"}}</span>
                 {{/if}}
                 {{#if @product.is_recommended}}
-                    <span><FaIcon @icon="star" /> Recommended</span>
+                    <span><FaIcon @icon="star" /> {{t "storefront.product-list.recommended"}}</span>
                 {{/if}}
                 {{#if @product.is_on_sale}}
-                    <span><FaIcon @icon="badge-percent" /> On sale</span>
+                    <span><FaIcon @icon="badge-percent" /> {{t "storefront.product-list.on-sale"}}</span>
                 {{/if}}
             </div>
         </div>
 
         <div class="storefront-product-card__footer">
-            <span>{{n-a @product.updatedAgo "Not updated"}}</span>
+            <span>{{n-a @product.updatedAgo (t "storefront.product-list.not-updated")}}</span>
             <div class="storefront-product-card__quick-actions">
                 <LinkTo
                     @route={{@editRoute}}
                     @model={{@product}}
                     disabled={{cannot "storefront update product"}}
                     class="btn btn-xs btn-default"
-                    aria-label={{concat "Edit " @product.name}}
+                    aria-label={{t "storefront.product-list.edit-product" name=@product.name}}
                 >
                     <FaIcon @icon="pencil" />
                 </LinkTo>

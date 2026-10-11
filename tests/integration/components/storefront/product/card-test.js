@@ -2,9 +2,11 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'dummy/tests/helpers';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { setupIntl } from 'ember-intl/test-support';
 
 module('Integration | Component | storefront/product/card', function (hooks) {
     setupRenderingTest(hooks);
+    setupIntl(hooks, 'en-us');
 
     test('it renders product catalog details', async function (assert) {
         this.set('product', {
@@ -41,8 +43,8 @@ module('Integration | Component | storefront/product/card', function (hooks) {
         assert.dom('[data-test-storefront-product-card]').includesText('Signature Bento');
         assert.dom('[data-test-storefront-product-card]').includesText('Lunch');
         assert.dom('[data-test-storefront-product-card]').includesText('BENTO-1');
-        assert.dom('[data-test-storefront-product-card]').includesText('1 variants');
-        assert.dom('[data-test-storefront-product-card]').includesText('1 add-ons');
+        assert.dom('[data-test-storefront-product-card]').includesText('1 variant');
+        assert.dom('[data-test-storefront-product-card]').includesText('1 add-on');
         assert.dom('[data-test-storefront-product-card]').includesText('Recommended');
     });
 

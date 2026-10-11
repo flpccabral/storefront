@@ -4,10 +4,10 @@
             {{#if this.isListView}}
                 <div class="storefront-product-table">
                     <div class="storefront-product-row storefront-product-row--header">
-                        <span>Product</span>
-                        <span>Price</span>
-                        <span>Status</span>
-                        <span>Options</span>
+                        <span>{{t "storefront.product-list.columns.product"}}</span>
+                        <span>{{t "storefront.product-list.columns.price"}}</span>
+                        <span>{{t "storefront.product-list.columns.status"}}</span>
+                        <span>{{t "storefront.product-list.columns.options"}}</span>
                         <span></span>
                     </div>
                     {{#each this.products as |product|}}
@@ -32,8 +32,8 @@
         {{else}}
             <div class="storefront-product-empty" data-test-storefront-product-empty>
                 <FaIcon @icon="box-open" />
-                <h3>No products found</h3>
-                <p>{{if @category "Create the first product in this category." "Create a category, then add products to your catalog."}}</p>
+                <h3>{{t "storefront.product-list.no-products"}}</h3>
+                <p>{{if @category (t "storefront.product-list.empty-category") (t "storefront.product-list.empty-catalog")}}</p>
             </div>
         {{/if}}
     </div>

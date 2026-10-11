@@ -1,8 +1,8 @@
 <aside class="storefront-product-sidebar" data-test-storefront-product-category-sidebar>
     <div class="storefront-product-sidebar__header">
         <div>
-            <h3>Categories</h3>
-            <p>Organize products for storefront browsing.</p>
+            <h3>{{t "storefront.product-list.categories"}}</h3>
+            <p>{{t "storefront.product-list.categories-help"}}</p>
         </div>
         <Button
             @type="default"
@@ -17,8 +17,8 @@
     <button type="button" class="storefront-product-category {{unless @activeCategory "is-active"}}" data-test-storefront-product-category="all" {{on "click" @onViewAll}}>
         <span class="storefront-product-category__icon"><FaIcon @icon="th-large" /></span>
         <span class="storefront-product-category__content">
-            <strong>All Products</strong>
-            <small>Full catalog</small>
+            <strong>{{t "storefront.product-list.all-products"}}</strong>
+            <small>{{t "storefront.product-list.full-catalog"}}</small>
         </span>
     </button>
 
@@ -39,13 +39,13 @@
                 />
                 <span class="storefront-product-category__content">
                     <strong>{{category.name}}</strong>
-                    <small>{{n-a category.description "No description"}}</small>
+                    <small>{{n-a category.description (t "storefront.product-list.no-description")}}</small>
                 </span>
             </button>
         {{else}}
             <div class="storefront-product-sidebar__empty">
                 <FaIcon @icon="folder-open" />
-                <span>No categories yet</span>
+                <span>{{t "storefront.product-list.no-categories"}}</span>
             </div>
         {{/each}}
     </div>

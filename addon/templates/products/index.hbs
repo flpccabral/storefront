@@ -15,16 +15,16 @@
             </button>
         </div>
         {{#if this.category}}
-            <DropdownButton @icon="gear" @text="Category" @type="default" @size="sm" @contentClass="dropdown-menu" @renderInPlace={{true}} as |dd|>
+            <DropdownButton @icon="gear" @text={{t "storefront.product-list.category"}} @type="default" @size="sm" @contentClass="dropdown-menu" @renderInPlace={{true}} as |dd|>
                 <div class="next-dd-menu mt-1 mx-0" aria-labelledby="user-menu">
                     <div class="px-1">
                         <a href="#" class="next-dd-item" disabled={{cannot "storefront update product-category"}} {{on "click" (dropdown-fn dd this.activeProductsController.editCategory this.category)}}>
-                            Edit this category...
+                            {{t "storefront.product-list.edit-category"}}
                         </a>
                     </div>
                     <div class="px-1">
                         <a href="#" class="text-red-500 next-dd-item" disabled={{cannot "storefront delete product-category"}} {{on "click" (dropdown-fn dd this.activeProductsController.deleteCategory)}}>
-                            Delete this category...
+                            {{t "storefront.product-list.delete-category"}}
                         </a>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
             @text={{t "storefront.common.new"}}
             @onClick={{this.createNewProduct}}
             @disabled={{not this.category}}
-            @helpText={{unless this.category "Select a category to create a product within"}}
+            @helpText={{unless this.category (t "storefront.product-list.select-category-first")}}
             @permission="storefront create product"
         />
         <Button
