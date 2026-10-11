@@ -1,5 +1,24 @@
 storefront:
   extension-name: Storefront
+  order-details:
+    overview: "Visão geral"
+    driver-assigned: "Motorista atribuído ao pedido."
+    driver-unassigned: "Motorista removido do pedido."
+    this-driver: "este motorista"
+    unassign-driver-title: "Remover {driverName}?"
+    unassign-driver-body: "O motorista deixará de estar atribuído a este pedido."
+    mark-ready-dispatch-body: "Marcar o pedido como pronto vai despachá-lo para o motorista atribuído."
+    update-activity-title: "Atualizar atividade do pedido"
+    update-activity-body: "Atualizar este pedido para {status}?"
+    actions:
+      accept-order: "Aceitar pedido"
+      mark-as-ready: "Marcar como pronto"
+      mark-picked-up: "Marcar como retirado"
+      complete-order: "Concluir pedido"
+      update-activity: "Atualizar atividade"
+      assign-driver: "Atribuir motorista"
+      unassign-driver: "Remover motorista"
+      cancel-order: "Cancelar pedido"
   extension:
     description: "Gestão da loja on-line: produtos, pedidos, clientes e promoções."
     shortcuts:

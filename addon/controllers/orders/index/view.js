@@ -6,6 +6,7 @@ import { isArray } from '@ember/array';
 export default class OrdersIndexViewController extends BaseController {
     @service storefrontOrderActions;
     @service('universe/menu-service') menuService;
+    @service intl;
 
     get tabs() {
         const registeredTabs = this.menuService.getMenuItems('storefront:component:order:details');
@@ -13,10 +14,10 @@ export default class OrdersIndexViewController extends BaseController {
         return [
             {
                 route: 'orders.index.view.index',
-                label: 'Overview',
+                label: this.intl.t('storefront.order-details.overview'),
                 icon: 'folder-open',
             },
-            ...(isArray(registeredTabs) ? registeredTabs : []),
+            ...(isArray(registeredTabs) ? registeredTabs.map((tab) => ({ ...tab, label: this.storefrontOrderActions.translateLabel(tab.label ?? tab.title) })) : []),
         ];
     }
 

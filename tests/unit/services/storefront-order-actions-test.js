@@ -1,9 +1,12 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'dummy/tests/helpers';
 import Service from '@ember/service';
+import { setupIntl } from 'ember-intl/test-support';
 
 module('Unit | Service | storefront-order-actions', function (hooks) {
     setupTest(hooks);
+    // Action labels are translated; assert against the English text.
+    setupIntl(hooks, 'en-us');
 
     test('it opens order details through the resource context panel', async function (assert) {
         assert.expect(14);

@@ -42,19 +42,41 @@ export default class StorefrontOrderActionsService extends Service {
         return hydratedOrder;
     }
 
+    /**
+     * Tabs registered by other extensions may carry a translation key as their label.
+     */
+    translateLabel(value) {
+        return typeof value === 'string' && this.intl.exists(value) ? this.intl.t(value) : value;
+    }
+
+    /**
+     * The workflow service describes its actions in English; translate the ones it knows.
+     */
+    workflowActionText(descriptor) {
+        const keys = {
+            'Accept order': 'accept-order',
+            'Mark as Ready': 'mark-as-ready',
+            'Mark Picked Up': 'mark-picked-up',
+            'Complete order': 'complete-order',
+            'Update activity': 'update-activity',
+        };
+
+        return keys[descriptor.text] ? this.intl.t(`storefront.order-details.actions.${keys[descriptor.text]}`) : descriptor.text;
+    }
+
     tabsFor() {
         const registeredTabs = this.menuService.getMenuItems('storefront:component:order:details');
 
         return [
             {
-                label: 'Overview',
+                label: this.intl.t('storefront.order-details.overview'),
                 key: 'overview',
                 icon: 'folder-open',
                 component: 'storefront/order/details',
             },
             ...(isArray(registeredTabs)
                 ? registeredTabs.map((tab) => ({
-                      label: tab.label ?? tab.title,
+                      label: this.translateLabel(tab.label ?? tab.title),
                       key: tab.slug,
                       icon: tab.icon,
                       component: 'storefront/order/details/registered-tab',
@@ -75,7 +97,7 @@ export default class StorefrontOrderActionsService extends Service {
     actionItemsFor(order, callback) {
         const isTerminal = this.storefrontOrderWorkflow.isTerminal(order);
         const workflowItems = this.storefrontOrderWorkflow.primaryActionDescriptorsFor(order).map((descriptor) => ({
-            text: descriptor.text,
+            text: this.workflowActionText(descriptor),
             icon: descriptor.icon,
             type: descriptor.type,
             fn: () => this.performWorkflowAction(descriptor, order, callback),
@@ -84,7 +106,9 @@ export default class StorefrontOrderActionsService extends Service {
         return [
             ...workflowItems,
             {
-                text: this.storefrontOrderWorkflow.hasAssignedDriver(order) ? 'Unassign Driver' : 'Assign Driver',
+                text: this.intl.t(
+                    this.storefrontOrderWorkflow.hasAssignedDriver(order) ? 'storefront.order-details.actions.unassign-driver' : 'storefront.order-details.actions.assign-driver'
+                ),
                 icon: this.storefrontOrderWorkflow.hasAssignedDriver(order) ? 'user-minus' : 'id-card',
                 disabled: isTerminal,
                 fn: () => (this.storefrontOrderWorkflow.hasAssignedDriver(order) ? this.unassignDriver(order, callback) : this.assignDriver(order, callback)),
@@ -93,7 +117,7 @@ export default class StorefrontOrderActionsService extends Service {
                 separator: true,
             },
             {
-                text: 'Cancel order',
+                text: this.intl.t('storefront.order-details.actions.cancel-order'),
                 icon: 'ban',
                 class: 'text-danger',
                 disabled: isTerminal,
@@ -289,7 +313,7 @@ export default class StorefrontOrderActionsService extends Service {
                     this.setOrderProperty(order, 'has_driver_assigned', Boolean(driver));
                     await order.save();
                     this.refreshOrderActions(order, callback);
-                    this.notifications.success('Driver assigned to order.');
+                    this.notifications.success(this.intl.t('storefront.order-details.driver-assigned'));
                     modal.done();
                     if (typeof callback === 'function') {
                         callback(order);
@@ -310,12 +334,12 @@ export default class StorefrontOrderActionsService extends Service {
     }
 
     unassignDriver(order, callback) {
-        const driverName = order?.driver_assigned?.name ?? order?.driver_name ?? 'this driver';
+        const driverName = order?.driver_assigned?.name ?? order?.driver_name ?? this.intl.t('storefront.order-details.this-driver');
 
         this.modalsManager.confirm({
-            title: `Unassign ${driverName}?`,
-            body: 'The driver will no longer be assigned to this order.',
-            acceptButtonText: 'Unassign Driver',
+            title: this.intl.t('storefront.order-details.unassign-driver-title', { driverName }),
+            body: this.intl.t('storefront.order-details.unassign-driver-body'),
+            acceptButtonText: this.intl.t('storefront.order-details.actions.unassign-driver'),
             acceptButtonScheme: 'danger',
             acceptButtonIcon: 'user-minus',
             order,
@@ -329,7 +353,7 @@ export default class StorefrontOrderActionsService extends Service {
                     this.setOrderProperty(order, 'has_driver_assigned', false);
                     const response = await this.fetch.post('orders/unassign-driver', { order: order.id }, { namespace: 'storefront/int/v1' });
                     this.setOrderStateFromResponse(order, response, null, callback);
-                    this.notifications.success('Driver unassigned from order.');
+                    this.notifications.success(this.intl.t('storefront.order-details.driver-unassigned'));
                     modal.done();
                 } catch (err) {
                     this.notifications.serverError(err);
@@ -421,7 +445,7 @@ export default class StorefrontOrderActionsService extends Service {
         if (!order.adhoc && this.hasAssignedDriver(order)) {
             return this.modalsManager.confirm({
                 title: this.intl.t('storefront.component.widget.orders.mark-as-ready-modal-title'),
-                body: 'Marking the order as ready will dispatch the order to the assigned driver.',
+                body: this.intl.t('storefront.order-details.mark-ready-dispatch-body'),
                 acceptButtonText: this.intl.t('storefront.component.widget.orders.mark-as-ready-modal-accept-button-text'),
                 acceptButtonIcon: 'paper-plane',
                 acceptButtonScheme: 'success',
@@ -547,9 +571,9 @@ export default class StorefrontOrderActionsService extends Service {
         }
 
         this.modalsManager.confirm({
-            title: 'Update Order Activity',
-            body: `Update this order to ${activity._resolved_status ?? activity.status ?? activity.code}?`,
-            acceptButtonText: 'Update Activity',
+            title: this.intl.t('storefront.order-details.update-activity-title'),
+            body: this.intl.t('storefront.order-details.update-activity-body', { status: activity._resolved_status ?? activity.status ?? activity.code }),
+            acceptButtonText: this.intl.t('storefront.order-details.actions.update-activity'),
             acceptButtonIcon: 'signal',
             acceptButtonScheme: 'success',
             confirm: async (modal) => {

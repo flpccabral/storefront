@@ -1,5 +1,24 @@
 storefront:
   extension-name: Storefront
+  order-details:
+    overview: "Overview"
+    driver-assigned: "Driver assigned to order."
+    driver-unassigned: "Driver unassigned from order."
+    this-driver: "this driver"
+    unassign-driver-title: "Unassign {driverName}?"
+    unassign-driver-body: "The driver will no longer be assigned to this order."
+    mark-ready-dispatch-body: "Marking the order as ready will dispatch the order to the assigned driver."
+    update-activity-title: "Update Order Activity"
+    update-activity-body: "Update this order to {status}?"
+    actions:
+      accept-order: "Accept order"
+      mark-as-ready: "Mark as Ready"
+      mark-picked-up: "Mark Picked Up"
+      complete-order: "Complete order"
+      update-activity: "Update activity"
+      assign-driver: "Assign Driver"
+      unassign-driver: "Unassign Driver"
+      cancel-order: "Cancel order"
   extension:
     description: "Online store management: products, orders, customers, and promotions."
     shortcuts:
