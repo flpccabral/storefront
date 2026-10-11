@@ -54,6 +54,8 @@ export default class CatalogsIndexController extends Controller {
             acceptButtonText: this.intl.t('storefront.catalog-list.save-changes'),
             acceptButtonIcon: 'save',
             statusOptions: this.statusOptions,
+            // A new catalog needs create permission; changing an existing one needs update permission.
+            writePermission: catalog.isNew ? 'storefront create catalog' : 'storefront update catalog',
             catalog,
             allProducts,
             selectedProducts: [],

@@ -1,7 +1,7 @@
 <Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}}>
     <div class="modal-body-container">
-        <InputGroup @name={{t "storefront.catalog-list.catalog-name"}} @value={{@options.catalog.name}} @disabled={{cannot "storefront create catalog"}} />
-        <InputGroup @name={{t "storefront.catalog-list.catalog-description"}} @value={{@options.catalog.description}} @disabled={{cannot "storefront create catalog"}} />
+        <InputGroup @name={{t "storefront.catalog-list.catalog-name"}} @value={{@options.catalog.name}} @disabled={{cannot @options.writePermission}} />
+        <InputGroup @name={{t "storefront.catalog-list.catalog-description"}} @value={{@options.catalog.description}} @disabled={{cannot @options.writePermission}} />
         <InputGroup @name={{t "storefront.catalog-list.catalog-status"}}>
             <Select
                 class="w-full"
