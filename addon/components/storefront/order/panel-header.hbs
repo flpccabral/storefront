@@ -5,13 +5,13 @@
         </div>
         <div class="min-w-0">
             <div class="storefront-order-panel-heading__eyebrow">
-                {{if @resource.meta.is_pickup "Pickup order" "Delivery order"}}
+                {{if @resource.meta.is_pickup (t "storefront.order-details.pickup-order-lower") (t "storefront.order-details.delivery-order-lower")}}
             </div>
             <div class="storefront-order-panel-heading__title">
-                {{n-a @resource.public_id "Order"}}
+                {{n-a @resource.public_id (t "storefront.order-details.order")}}
             </div>
             <div class="storefront-order-panel-heading__meta">
-                <span>{{n-a @resource.createdAt "No created date"}}</span>
+                <span>{{n-a @resource.createdAt (t "storefront.order-details.no-created-date")}}</span>
                 <span>{{format-currency (or @resource.meta.total @resource.transaction_amount 0) @resource.meta.currency}}</span>
             </div>
         </div>
@@ -27,15 +27,10 @@
             {{else}}
                 <Badge @hideStatusDot={{true}} @status="info" @wrapperClass="storefront-order-panel-heading__fulfillment-badge">
                     <FaIcon @icon="truck" class="mr-1" />
-                    Delivery Order
+                    {{t "storefront.order-details.delivery-order"}}
                 </Badge>
             {{/if}}
         </div>
-        <Layout::Resource::Panel::HeaderActions
-            @resource={{@resource}}
-            @actionButtons={{@actionButtons}}
-            @onPressCancel={{@onPressCancel}}
-            @authSchema={{@authSchema}}
-        />
+        <Layout::Resource::Panel::HeaderActions @resource={{@resource}} @actionButtons={{@actionButtons}} @onPressCancel={{@onPressCancel}} @authSchema={{@authSchema}} />
     </div>
 </div>

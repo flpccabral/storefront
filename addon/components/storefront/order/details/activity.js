@@ -6,6 +6,7 @@ import { task } from 'ember-concurrency';
 export default class StorefrontOrderDetailsActivityComponent extends Component {
     @service appCache;
     @service notifications;
+    @service intl;
     @service storefrontOrderActions;
     @service storefrontOrderWorkflow;
     activityLayoutCacheKey = 'storefront:order:activity:layout:v2';
@@ -48,14 +49,14 @@ export default class StorefrontOrderDetailsActivityComponent extends Component {
                 items: [
                     ...this.updateActivityItems,
                     {
-                        text: 'Reload activity',
+                        text: this.intl.t('storefront.order-details.reload-activity'),
                         icon: 'refresh',
                         onClick: () => {
                             this.loadActivity.perform();
                         },
                     },
                     {
-                        text: this.layout === 'timeline' ? 'View activity as list' : 'View activity as timeline',
+                        text: this.intl.t(this.layout === 'timeline' ? 'storefront.order-details.view-activity-list' : 'storefront.order-details.view-activity-timeline'),
                         icon: this.layout === 'timeline' ? 'list' : 'timeline',
                         onClick: () => {
                             this.layout = this.layout === 'timeline' ? 'list' : 'timeline';

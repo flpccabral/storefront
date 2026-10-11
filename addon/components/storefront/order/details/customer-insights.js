@@ -1,6 +1,9 @@
 import Component from '@glimmer/component';
+import { inject as service } from '@ember/service';
 
 export default class StorefrontOrderDetailsCustomerInsightsComponent extends Component {
+    @service intl;
+
     get customer() {
         return this.args.resource?.customer;
     }
@@ -18,22 +21,22 @@ export default class StorefrontOrderDetailsCustomerInsightsComponent extends Com
             return null;
         }
 
-        return this.orderCount > 1 ? 'Returning customer' : 'First-time customer';
+        return this.intl.t(this.orderCount > 1 ? 'storefront.order-details.returning-customer' : 'storefront.order-details.first-time-customer');
     }
 
     get contactStatus() {
         if (this.hasCompleteContact) {
-            return 'Phone and email available';
+            return this.intl.t('storefront.order-details.contact-status.phone-and-email');
         }
 
         if (this.customer?.phone) {
-            return 'Phone available';
+            return this.intl.t('storefront.order-details.contact-status.phone');
         }
 
         if (this.customer?.email) {
-            return 'Email available';
+            return this.intl.t('storefront.order-details.contact-status.email');
         }
 
-        return 'No contact details';
+        return this.intl.t('storefront.order-details.no-contact-details');
     }
 }

@@ -1,7 +1,7 @@
-<ContentPanel @title="Route" @open={{true}} @isLoading={{@isLoading}} @actionButtons={{@actionButtons}} @wrapperClass="bordered-top" ...attributes>
+<ContentPanel @title={{t "storefront.order-details.route"}} @open={{true}} @isLoading={{@isLoading}} @actionButtons={{@actionButtons}} @wrapperClass="bordered-top" ...attributes>
     {{#if this.hasRouteSummaryLine}}
         <div class="mb-3 flex items-center justify-between gap-3 text-xs">
-            <div class="font-semibold uppercase text-gray-500 dark:text-gray-400">All Stops - {{this.routeStopsCount}}</div>
+            <div class="font-semibold uppercase text-gray-500 dark:text-gray-400">{{t "storefront.order-details.all-stops" count=this.routeStopsCount}}</div>
             <div class="flex min-w-0 items-center gap-2 font-semibold text-gray-700 dark:text-gray-200">
                 <span>
                     {{#if this.hasTrackingDistance}}
@@ -29,16 +29,16 @@
     {{else}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-2">
             <div class="field-info-container">
-                <label class="field-name">Pickup</label>
+                <label class="field-name">{{t "storefront.order-details.pickup"}}</label>
                 <DisplayPlace @place={{@resource.payload.pickup}} @eta={{if this.showRouteEtaData (get @resource.eta @resource.payload.pickup.id)}} />
             </div>
             <div class="field-info-container">
-                <label class="field-name">Dropoff</label>
+                <label class="field-name">{{t "storefront.order-details.dropoff"}}</label>
                 <DisplayPlace @place={{@resource.payload.dropoff}} @eta={{if this.showRouteEtaData (get @resource.eta @resource.payload.dropoff.id)}} />
             </div>
             {{#if @resource.payload.return}}
                 <div class="field-info-container">
-                    <label class="field-name">Return</label>
+                    <label class="field-name">{{t "storefront.order-details.return"}}</label>
                     <DisplayPlace @place={{@resource.payload.return}} />
                 </div>
             {{/if}}

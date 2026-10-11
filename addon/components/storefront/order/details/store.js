@@ -7,6 +7,7 @@ const storefrontRecordCache = new Map();
 
 export default class StorefrontOrderDetailsStoreComponent extends Component {
     @service store;
+    @service intl;
 
     @tracked storefrontRecord;
     @tracked isLoadingStorefront = false;
@@ -30,7 +31,7 @@ export default class StorefrontOrderDetailsStoreComponent extends Component {
     }
 
     get storeName() {
-        return this.storefrontDisplay.name ?? this.fallbackStorefrontName ?? this.storefrontId ?? 'Store';
+        return this.storefrontDisplay.name ?? this.fallbackStorefrontName ?? this.storefrontId ?? this.intl.t('storefront.order-details.store');
     }
 
     get storeLogoUrl() {

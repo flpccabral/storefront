@@ -2,9 +2,11 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'dummy/tests/helpers';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { setupIntl } from 'ember-intl/test-support';
 
 module('Integration | Component | storefront/order/details', function (hooks) {
     setupRenderingTest(hooks);
+    setupIntl(hooks, 'en-us');
 
     test('it renders dedicated storefront order detail panels', async function (assert) {
         this.set('order', {

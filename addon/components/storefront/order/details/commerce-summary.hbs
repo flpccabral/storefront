@@ -1,6 +1,6 @@
 <ContentPanel
-    @title="Order"
-    @prefixTitleRight={{if @resource.payload.cod_amount "Cash" (n-a (titleize @resource.meta.gateway))}}
+    @title={{t "storefront.order-details.order"}}
+    @prefixTitleRight={{if @resource.payload.cod_amount (t "storefront.order-details.cash") (n-a (titleize @resource.meta.gateway))}}
     @prefixTitleRightClass={{if @resource.payload.cod_amount "text-green-400" "text-blue-400"}}
     @open={{true}}
     @isLoading={{@isLoading}}
@@ -14,13 +14,18 @@
                 {{#each @resource.payload.entities as |entity|}}
                     <div class="storefront-order-item">
                         <div class="storefront-order-item__qty">{{n-a entity.meta.quantity 1}}x</div>
-                        <Image src={{or entity.photo_url entity.image_url entity.meta.photo_url entity.meta.image_url entity.meta.product_image_url}} @fallbackSrc={{config "defaultValues.entityImage"}} class="storefront-order-item__image" alt={{entity.name}} />
+                        <Image
+                            src={{or entity.photo_url entity.image_url entity.meta.photo_url entity.meta.image_url entity.meta.product_image_url}}
+                            @fallbackSrc={{config "defaultValues.entityImage"}}
+                            class="storefront-order-item__image"
+                            alt={{entity.name}}
+                        />
                         <div class="storefront-order-item__body">
-                            <div class="storefront-order-item__name">{{n-a entity.name "Unnamed item"}}</div>
-                            <div class="storefront-order-item__description">{{n-a entity.description "No description"}}</div>
+                            <div class="storefront-order-item__name">{{n-a entity.name (t "storefront.order-details.unnamed-item")}}</div>
+                            <div class="storefront-order-item__description">{{n-a entity.description (t "storefront.order-details.no-description")}}</div>
                             {{#if entity.meta.scheduled_at}}
                                 <div class="storefront-order-item__options">
-                                    <span>Scheduled {{format-date-fns entity.meta.scheduled_at "d MMM yyyy HH:mm"}}</span>
+                                    <span>{{t "storefront.order-details.scheduled"}} {{format-date-fns entity.meta.scheduled_at "d MMM yyyy HH:mm"}}</span>
                                 </div>
                             {{/if}}
                             {{#if entity.meta.variants}}
@@ -47,23 +52,27 @@
         {{else}}
             <div class="storefront-order-empty-state">
                 <FaIcon @icon="receipt" />
-                <span>No order items were found.</span>
+                <span>{{t "storefront.order-details.no-items"}}</span>
             </div>
         {{/if}}
 
         <div class="storefront-order-totals mt-1">
-            <div><span>Subtotal</span><strong>{{format-currency @resource.meta.subtotal @resource.meta.currency}}</strong></div>
+            <div><span>{{t "storefront.order-details.subtotal"}}</span><strong>{{format-currency @resource.meta.subtotal @resource.meta.currency}}</strong></div>
             {{#unless @resource.meta.is_pickup}}
-                <div><span>Delivery fee</span><strong>{{format-currency @resource.meta.delivery_fee @resource.meta.currency}}</strong></div>
+                <div><span>{{t "storefront.order-details.delivery-fee"}}</span><strong>{{format-currency @resource.meta.delivery_fee @resource.meta.currency}}</strong></div>
             {{/unless}}
             {{#if @resource.meta.tip}}
-                <div><span>Tip</span><strong>{{get-tip-amount @resource.meta.tip @resource.meta.subtotal @resource.meta.currency}}</strong></div>
+                <div><span>{{t "storefront.order-details.tip"}}</span><strong>{{get-tip-amount @resource.meta.tip @resource.meta.subtotal @resource.meta.currency}}</strong></div>
             {{/if}}
             {{#if @resource.meta.delivery_tip}}
-                <div><span>Delivery tip</span><strong>{{get-tip-amount @resource.meta.delivery_tip @resource.meta.subtotal @resource.meta.currency}}</strong></div>
+                <div><span>{{t "storefront.order-details.delivery-tip"}}</span><strong>{{get-tip-amount
+                            @resource.meta.delivery_tip
+                            @resource.meta.subtotal
+                            @resource.meta.currency
+                        }}</strong></div>
             {{/if}}
             <div class="storefront-order-totals__total">
-                <span>Total</span>
+                <span>{{t "storefront.order-details.total"}}</span>
                 <strong>{{format-currency (or @resource.meta.total @resource.transaction_amount 0) @resource.meta.currency}}</strong>
             </div>
         </div>

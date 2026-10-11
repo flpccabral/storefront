@@ -1,12 +1,18 @@
-<ContentPanel @title={{t "order.fields.tracking"}} @prefixTitleRight={{@resource.tracking}} @isLoading={{@isLoading}} @open={{true}} @actionButtons={{@actionButtons}} @wrapperClass="bordered-top" ...attributes>
+<ContentPanel
+    @title={{t "order.fields.tracking"}}
+    @prefixTitleRight={{@resource.tracking}}
+    @isLoading={{@isLoading}}
+    @open={{true}}
+    @actionButtons={{@actionButtons}}
+    @wrapperClass="bordered-top"
+    ...attributes
+>
     {{#if this.hasTrackerData}}
         <div class="tracking-intelligence mb-4">
             <div class="tracking-intelligence__status">
                 <span class="tracking-intelligence-pill {{this.confidenceToneClass}}">
                     <span class="tracking-intelligence-pill__dot"></span>
-                    {{this.confidenceLabel}}
-                    confidence ·
-                    {{this.confidencePercent}}%
+                    {{t "storefront.order-details.tracking.confidence-pill" level=this.confidenceLabel percent=this.confidencePercent}}
                 </span>
                 <span class="tracking-intelligence-pill {{if (eq this.driverSignal 'Live') 'tracking-intelligence-pill--good' 'tracking-intelligence-pill--warn'}}">
                     <span class="tracking-intelligence-pill__dot"></span>
@@ -17,8 +23,10 @@
                     {{/if}}
                 </span>
                 {{#if @resource.tracker_data.fallback_provider}}
-                    <span class="tracking-intelligence-pill tracking-intelligence-pill--muted">Fallback:
-                        {{this.fallbackProviderLabel}}</span>
+                    <span class="tracking-intelligence-pill tracking-intelligence-pill--muted">{{t
+                            "storefront.order-details.tracking.fallback-pill"
+                            provider=this.fallbackProviderLabel
+                        }}</span>
                 {{/if}}
             </div>
 
@@ -34,7 +42,7 @@
                     {{#if this.canPingDriver}}
                         <button type="button" class="tracking-intelligence-alert__cta" disabled={{this.pingDriver.isRunning}} {{on "click" (perform this.pingDriver)}}>
                             <FaIcon @icon="bell" @size="xs" />
-                            <span>{{if this.pingDriver.isRunning "Pinging..." "Ping driver app"}}</span>
+                            <span>{{if this.pingDriver.isRunning (t "storefront.order-details.tracking.pinging") (t "storefront.order-details.tracking.ping-driver-app")}}</span>
                         </button>
                     {{/if}}
                 </div>
@@ -54,25 +62,25 @@
                 <div class="tracking-intelligence__eta-grid">
                     <div class="tracking-intelligence-cell tracking-intelligence-cell--accent">
                         <div class="tracking-intelligence-cell__label">
-                            Estimated start
-                            <span class="tracking-intelligence-tag">Pre-start</span>
+                            {{t "storefront.order-details.tracking.estimated-start"}}
+                            <span class="tracking-intelligence-tag">{{t "storefront.order-details.tracking.pre-start"}}</span>
                         </div>
                         <div class="tracking-intelligence-cell__value">
                             {{#if this.hasStartEta}}
                                 {{format-duration this.startEtaSeconds}}
                             {{else}}
-                                Pending start
+                                {{t "storefront.order-details.tracking.pending-start"}}
                             {{/if}}
                         </div>
-                        <div class="tracking-intelligence-cell__sub">Based on the assigned driver route to the first stop</div>
+                        <div class="tracking-intelligence-cell__sub">{{t "storefront.order-details.tracking.estimated-start-help"}}</div>
                     </div>
                 </div>
             {{else if this.showLiveEta}}
                 <div class="tracking-intelligence__eta-grid">
                     <div class="tracking-intelligence-cell tracking-intelligence-cell--accent">
                         <div class="tracking-intelligence-cell__label">
-                            Smart adjusted ETA
-                            <span class="tracking-intelligence-tag">Live</span>
+                            {{t "storefront.order-details.tracking.smart-adjusted-eta"}}
+                            <span class="tracking-intelligence-tag">{{t "storefront.order-details.tracking.live"}}</span>
                         </div>
                         <div class="tracking-intelligence-cell__value">
                             {{#if this.hasSmartAdjustedEta}}
@@ -81,10 +89,10 @@
                                 {{this.smartAdjustedEtaUnavailableLabel}}
                             {{/if}}
                         </div>
-                        <div class="tracking-intelligence-cell__sub">Based on provider route and driver signal</div>
+                        <div class="tracking-intelligence-cell__sub">{{t "storefront.order-details.tracking.smart-adjusted-eta-help"}}</div>
                     </div>
                     <div class="tracking-intelligence-cell">
-                        <div class="tracking-intelligence-cell__label">Reported ETA</div>
+                        <div class="tracking-intelligence-cell__label">{{t "storefront.order-details.tracking.reported-eta"}}</div>
                         <div class="tracking-intelligence-cell__value {{if this.isReportedEtaUntrusted 'tracking-intelligence-cell__value--muted'}}">
                             {{#if this.hasDisplayedReportedEta}}
                                 {{format-duration this.displayedReportedEtaSeconds}}
@@ -97,7 +105,7 @@
                 </div>
 
                 <div class="tracking-intelligence-confidence">
-                    <div class="tracking-intelligence-confidence__label">ETA confidence</div>
+                    <div class="tracking-intelligence-confidence__label">{{t "storefront.order-details.tracking.eta-confidence"}}</div>
                     <div class="tracking-intelligence-confidence__segments {{this.confidenceToneClass}}">
                         {{#each this.confidenceSegments as |segment|}}
                             <span class="{{if segment.lit 'is-lit'}}"></span>
@@ -112,7 +120,7 @@
                         <div class="tracking-intelligence-destination__label">{{this.activeStopLabel}}</div>
                         <div class="tracking-intelligence-destination__address">{{n-a @resource.tracker_data.active_stop.address}}</div>
                         <div class="tracking-intelligence-destination__eta">
-                            ETA:
+                            {{t "storefront.order-details.tracking.eta-label"}}
                             <strong>
                                 {{#if this.hasActiveEta}}
                                     {{format-duration this.activeEtaSeconds}}
@@ -126,7 +134,7 @@
 
                 <div class="tracking-intelligence-distance">
                     <div class="tracking-intelligence-distance__row">
-                        <span>Reported total</span>
+                        <span>{{t "storefront.order-details.tracking.reported-total"}}</span>
                         <strong>
                             {{#if this.hasRemainingDistance}}
                                 {{format-meters @resource.tracker_data.route.distance_m}}
@@ -139,7 +147,7 @@
                         </div>
                     </div>
                     <div class="tracking-intelligence-distance__row">
-                        <span>Between stops</span>
+                        <span>{{t "storefront.order-details.tracking.between-stops"}}</span>
                         <strong>
                             {{#if this.hasCurrentLegDistance}}
                                 {{format-meters this.currentLeg.distance_m}}
@@ -151,15 +159,13 @@
                             <span style={{this.currentLegProgressStyle}}></span>
                         </div>
                     </div>
-                    <div class="tracking-intelligence-distance__foot">Provider context:
-                        {{this.providerLabel}}
-                        route</div>
+                    <div class="tracking-intelligence-distance__foot">{{t "storefront.order-details.tracking.provider-context" provider=this.providerLabel}}</div>
                 </div>
             {{/if}}
 
             <details class="tracking-intelligence-diagnostics">
                 <summary>
-                    <span>Diagnostics</span>
+                    <span>{{t "storefront.order-details.tracking.diagnostics"}}</span>
                     <span class="tracking-intelligence-diagnostics__summary">
                         {{this.diagnosticsSummaryLabel}}
                         <FaIcon @icon="chevron-right" @size="xs" />
@@ -183,16 +189,16 @@
             </details>
 
             <div class="tracking-intelligence-footer">
-                <span>Updated {{n-a (format-date-fns @resource.tracker_data.generated_at "d MMM HH:mm")}}</span>
+                <span>{{t "storefront.order-details.tracking.updated" date=(n-a (format-date-fns @resource.tracker_data.generated_at "d MMM HH:mm"))}}</span>
                 <button type="button" class="tracking-intelligence-footer__button" disabled={{this.loadTrackerData.isRunning}} {{on "click" (perform this.loadTrackerData)}}>
                     <FaIcon @icon="rotate" @size="xs" class={{if this.loadTrackerData.isRunning "fa-spin"}} />
-                    <span>{{if this.loadTrackerData.isRunning "Recalculating" "Recalculate"}}</span>
+                    <span>{{if this.loadTrackerData.isRunning (t "storefront.order-details.tracking.recalculating") (t "storefront.order-details.tracking.recalculate")}}</span>
                 </button>
             </div>
         </div>
     {{/if}}
 
-    <div class="text-xs uppercase tracking-wide font-semibold text-gray-500 dark:text-gray-400 mb-2">Labels</div>
+    <div class="text-xs uppercase tracking-wide font-semibold text-gray-500 dark:text-gray-400 mb-2">{{t "storefront.order-details.tracking.labels"}}</div>
     <div class="tracking-intelligence-labels">
         <div class="flex flex-row items-center justify-center space-x-3">
             <div class="rounded-md bg-white p-2">

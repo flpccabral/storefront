@@ -1,6 +1,9 @@
 import Component from '@glimmer/component';
+import { inject as service } from '@ember/service';
 
 export default class StorefrontOrderDetailsDetailComponent extends Component {
+    @service intl;
+
     get orderType() {
         return this.args.resource?.type ?? this.args.resource?.order_config?.name ?? this.args.resource?.order_config?.key;
     }
@@ -11,7 +14,7 @@ export default class StorefrontOrderDetailsDetailComponent extends Component {
 
     get paymentMethod() {
         if (this.isCashPayment) {
-            return 'Cash';
+            return this.intl.t('storefront.order-details.cash');
         }
 
         return this.args.resource?.transaction?.gateway ?? this.args.resource?.meta?.gateway;
