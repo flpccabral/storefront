@@ -1,5 +1,18 @@
 storefront:
   extension-name: Storefront
+  order-list:
+    view-order: "View order"
+    dispatch-order: "Dispatch order"
+    delete-order: "Delete order"
+    dispatch-title: "Are you sure you want to dispatch this order?"
+    dispatch-body: "Once this order is dispatched the assigned driver will be notified."
+    dispatch-success: "Order {orderId} has been dispatched."
+    item-count: "# Items"
+    select-user: "Select user"
+    order-actions: "Order Actions"
+    dispatch: "Dispatch"
+    delete-orders: "Delete Orders"
+    dispatch-orders: "Dispatch Orders"
   order-details:
     overview: "Overview"
     driver-assigned: "Driver assigned to order."

@@ -1,5 +1,18 @@
 storefront:
   extension-name: Storefront
+  order-list:
+    view-order: "Ver pedido"
+    dispatch-order: "Despachar pedido"
+    delete-order: "Excluir pedido"
+    dispatch-title: "Tem certeza de que deseja despachar este pedido?"
+    dispatch-body: "Assim que este pedido for despachado, o motorista atribuído será notificado."
+    dispatch-success: "O pedido {orderId} foi despachado."
+    item-count: "Nº de itens"
+    select-user: "Selecione o usuário"
+    order-actions: "Ações do pedido"
+    dispatch: "Despachar"
+    delete-orders: "Excluir pedidos"
+    dispatch-orders: "Despachar pedidos"
   order-details:
     overview: "Visão geral"
     driver-assigned: "Motorista atribuído ao pedido."

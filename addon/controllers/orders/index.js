@@ -156,7 +156,7 @@ export default class OrdersIndexController extends BaseController {
             filterComponent: 'filter/date',
         },
         {
-            label: '# Items',
+            label: this.intl.t('storefront.order-list.item-count'),
             cellComponent: 'table/cell/base',
             valuePath: 'item_count',
             resizable: true,
@@ -224,7 +224,7 @@ export default class OrdersIndexController extends BaseController {
             hidden: true,
             filterable: true,
             filterComponent: 'filter/model',
-            filterComponentPlaceholder: 'Select user',
+            filterComponentPlaceholder: this.intl.t('storefront.order-list.select-user'),
             filterParam: 'created_by',
             model: 'user',
         },
@@ -246,20 +246,20 @@ export default class OrdersIndexController extends BaseController {
             ddButtonText: false,
             ddButtonIcon: 'ellipsis-h',
             ddButtonIconPrefix: 'fas',
-            ddMenuLabel: 'Order Actions',
+            ddMenuLabel: this.intl.t('storefront.order-list.order-actions'),
             cellClassNames: 'overflow-visible',
             wrapperClass: 'flex items-center justify-end mx-2',
             sticky: 'right',
             width: 60,
             actions: [
                 {
-                    label: this.intl.t('fleet-ops.operations.orders.index.view-order'),
+                    label: this.intl.t('storefront.order-list.view-order'),
                     icon: 'eye',
                     fn: this.viewOrder,
                     permission: 'fleet-ops view order',
                 },
                 {
-                    label: this.intl.t('fleet-ops.operations.orders.index.dispatch-order'),
+                    label: this.intl.t('storefront.order-list.dispatch-order'),
                     icon: 'paper-plane',
                     fn: this.dispatchOrder,
                     permission: 'fleet-ops dispatch order',
@@ -275,7 +275,7 @@ export default class OrdersIndexController extends BaseController {
                     separator: true,
                 },
                 {
-                    label: this.intl.t('fleet-ops.operations.orders.index.delete-order'),
+                    label: this.intl.t('storefront.order-list.delete-order'),
                     icon: 'trash',
                     fn: this.deleteOrder,
                     permission: 'fleet-ops delete order',
@@ -352,10 +352,10 @@ export default class OrdersIndexController extends BaseController {
 
     @action dispatchOrder(order, options = {}) {
         this.modalsManager.confirm({
-            title: this.intl.t('fleet-ops.operations.orders.index.dispatch-title'),
-            body: this.intl.t('fleet-ops.operations.orders.index.dispatch-body'),
+            title: this.intl.t('storefront.order-list.dispatch-title'),
+            body: this.intl.t('storefront.order-list.dispatch-body'),
             acceptButtonScheme: 'primary',
-            acceptButtonText: 'Dispatch',
+            acceptButtonText: this.intl.t('storefront.order-list.dispatch'),
             acceptButtonIcon: 'paper-plane',
             order,
             confirm: async (modal) => {
@@ -364,7 +364,7 @@ export default class OrdersIndexController extends BaseController {
                 try {
                     await this.fetch.patch('orders/dispatch', { order: order.id });
                     order.set('status', 'dispatched');
-                    this.notifications.success(this.intl.t('fleet-ops.operations.orders.index.dispatch-success', { orderId: order.public_id }));
+                    this.notifications.success(this.intl.t('storefront.order-list.dispatch-success', { orderId: order.public_id }));
                     modal.done();
                 } catch (error) {
                     this.notifications.serverError(error);
@@ -389,7 +389,7 @@ export default class OrdersIndexController extends BaseController {
 
         this.crud.bulkDelete(selected, {
             modelNamePath: `public_id`,
-            acceptButtonText: 'Delete Orders',
+            acceptButtonText: this.intl.t('storefront.order-list.delete-orders'),
             onSuccess: async () => {
                 await this.hostRouter.refresh();
                 this.table.untoggleSelectAll();
@@ -431,7 +431,7 @@ export default class OrdersIndexController extends BaseController {
         }
 
         this.crud.bulkAction('dispatch', selected, {
-            acceptButtonText: 'Dispatch Orders',
+            acceptButtonText: this.intl.t('storefront.order-list.dispatch-orders'),
             acceptButtonScheme: 'magic',
             acceptButtonIcon: 'rocket',
             modelNamePath: 'public_id',
