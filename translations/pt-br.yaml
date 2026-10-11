@@ -359,6 +359,9 @@ storefront:
     switching-to-new-store: "Mudando para a loja recém-criada..."
     search-placeholder: "Pesquisar na vitrine..."
   component:
+    display-place:
+      no-address: "Nenhum endereço de {type}!"
+      no-address-message: "Nenhum endereço!"
     storefront-order-summary:
       order-summary-title: Resumo do Pedido da Vitrine
     modals:

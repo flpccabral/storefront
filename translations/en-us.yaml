@@ -359,6 +359,9 @@ storefront:
     switching-to-new-store: "Switching to newly created store..."
     search-placeholder: "Search Storefront..."
   component:
+    display-place:
+      no-address: "No {type} address!"
+      no-address-message: "No address!"
     storefront-order-summary:
       order-summary-title: Storefront Order Summary
     modals:

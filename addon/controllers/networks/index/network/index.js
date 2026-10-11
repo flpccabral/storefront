@@ -251,7 +251,7 @@ export default class NetworksIndexNetworkIndexController extends Controller {
                 modal.startLoading();
 
                 return channel.save().then(() => {
-                    this.notifications.success(this.intl.t('storefront.controllers.networks.index.notification-channel-changes-save'));
+                    this.notifications.success(this.intl.t('storefront.networks.index.network.index.notification-channel-changes-save'));
                 });
             };
         }
