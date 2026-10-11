@@ -22,22 +22,22 @@ export default class ApplicationController extends Controller {
         return [
             {
                 label: this.intl.t('storefront.sidebar.dashboard'),
-                description: 'Storefront dashboard and sales overview.',
+                description: this.intl.t('storefront.sidebar.dashboard-description'),
                 icon: 'home',
                 route: 'console.storefront.home',
                 keywords: ['dashboard', 'overview', 'metrics', 'sales'],
             },
             {
                 label: this.intl.t('storefront.sidebar.products'),
-                description: 'Manage products, categories, variants, and addons.',
+                description: this.intl.t('storefront.sidebar.products-description'),
                 icon: 'box',
                 permission: 'storefront list product',
                 visible: this.can('storefront see product'),
                 disabled: !hasActiveStore,
                 children: [
                     {
-                        label: 'All Products',
-                        description: 'Browse and manage product inventory.',
+                        label: this.intl.t('storefront.sidebar.all-products'),
+                        description: this.intl.t('storefront.sidebar.all-products-description'),
                         icon: 'box',
                         route: 'console.storefront.products.index.index',
                         keywords: ['inventory', 'items', 'sku', 'create product', 'add product'],
@@ -47,7 +47,7 @@ export default class ApplicationController extends Controller {
             },
             {
                 label: this.intl.t('storefront.sidebar.catalogs'),
-                description: 'Create and manage storefront catalogs.',
+                description: this.intl.t('storefront.sidebar.catalogs-description'),
                 icon: 'book-open',
                 route: 'console.storefront.catalogs',
                 permission: 'storefront list catalog',
@@ -57,7 +57,7 @@ export default class ApplicationController extends Controller {
             },
             {
                 label: this.intl.t('storefront.sidebar.customers'),
-                description: 'Review storefront customers and order history.',
+                description: this.intl.t('storefront.sidebar.customers-description'),
                 icon: 'users',
                 route: 'console.storefront.customers',
                 permission: 'storefront list user',
@@ -67,7 +67,7 @@ export default class ApplicationController extends Controller {
             },
             {
                 label: this.intl.t('storefront.sidebar.orders'),
-                description: 'Manage incoming storefront orders.',
+                description: this.intl.t('storefront.sidebar.orders-description'),
                 icon: 'file-invoice-dollar',
                 route: 'console.storefront.orders',
                 permission: 'storefront list order',
@@ -77,7 +77,7 @@ export default class ApplicationController extends Controller {
             },
             {
                 label: this.intl.t('storefront.sidebar.networks'),
-                description: 'Manage marketplace networks and participating stores.',
+                description: this.intl.t('storefront.sidebar.networks-description'),
                 icon: 'network-wired',
                 route: 'console.storefront.networks',
                 permission: 'storefront list network',
@@ -87,7 +87,7 @@ export default class ApplicationController extends Controller {
             },
             {
                 label: this.intl.t('storefront.sidebar.food-trucks'),
-                description: 'Manage food truck locations and availability.',
+                description: this.intl.t('storefront.sidebar.food-trucks-description'),
                 icon: 'truck',
                 route: 'console.storefront.food-trucks',
                 permission: 'storefront list food-truck',
@@ -97,7 +97,7 @@ export default class ApplicationController extends Controller {
             },
             {
                 label: this.intl.t('storefront.sidebar.promotions'),
-                description: 'Discounts, promo codes, customer segments and campaigns.',
+                description: this.intl.t('storefront.sidebar.promotions-description'),
                 icon: 'bullhorn',
                 permission: 'storefront view promotions',
                 visible: this.can('storefront see promotions'),
@@ -105,28 +105,28 @@ export default class ApplicationController extends Controller {
                 children: [
                     {
                         label: this.intl.t('storefront.promotions.list.tab-title'),
-                        description: 'Create discounts and promo codes applied at checkout.',
+                        description: this.intl.t('storefront.sidebar.promotions-list-description'),
                         icon: 'tags',
                         route: 'console.storefront.promotions.index',
                         keywords: ['discounts', 'coupons', 'promo codes', 'sales', 'deals'],
                     },
                     {
                         label: this.intl.t('storefront.promotions.campaigns.tab-title'),
-                        description: 'Send scheduled notifications to customer segments.',
+                        description: this.intl.t('storefront.sidebar.campaigns-description'),
                         icon: 'bullhorn',
                         route: 'console.storefront.promotions.campaigns',
                         keywords: ['marketing', 'broadcast', 'notifications'],
                     },
                     {
                         label: this.intl.t('storefront.promotions.segments.tab-title'),
-                        description: 'Group customers by their order history for targeting.',
+                        description: this.intl.t('storefront.sidebar.segments-description'),
                         icon: 'users',
                         route: 'console.storefront.promotions.segments',
                         keywords: ['audience', 'customers', 'targeting'],
                     },
                     {
-                        label: 'Push Notifications',
-                        description: 'Send push notifications to storefront customers.',
+                        label: this.intl.t('storefront.sidebar.push-notifications'),
+                        description: this.intl.t('storefront.sidebar.push-notifications-description'),
                         icon: 'bell',
                         route: 'console.storefront.promotions.push-notifications',
                         keywords: ['marketing', 'broadcast', 'campaigns'],
@@ -135,7 +135,7 @@ export default class ApplicationController extends Controller {
             },
             {
                 label: this.intl.t('storefront.sidebar.settings'),
-                description: 'Configure storefront settings, locations, gateways, and notifications.',
+                description: this.intl.t('storefront.sidebar.settings-description'),
                 icon: 'cogs',
                 permission: 'storefront view settings',
                 visible: this.can('storefront see settings'),
@@ -143,35 +143,35 @@ export default class ApplicationController extends Controller {
                 children: [
                     {
                         label: this.intl.t('storefront.common.general'),
-                        description: 'General storefront settings.',
+                        description: this.intl.t('storefront.sidebar.general-description'),
                         icon: 'cog',
                         route: 'console.storefront.settings.index',
                         keywords: ['settings', 'general'],
                     },
                     {
                         label: this.intl.t('storefront.common.location'),
-                        description: 'Storefront pickup and service locations.',
+                        description: this.intl.t('storefront.sidebar.location-description'),
                         icon: 'map-marker-alt',
                         route: 'console.storefront.settings.locations',
                         keywords: ['locations', 'places', 'pickup'],
                     },
                     {
                         label: this.intl.t('storefront.common.gateways'),
-                        description: 'Payment gateway settings.',
+                        description: this.intl.t('storefront.sidebar.gateways-description'),
                         icon: 'cash-register',
                         route: 'console.storefront.settings.gateways',
                         keywords: ['payments', 'stripe', 'qpay', 'checkout'],
                     },
                     {
                         label: this.intl.t('storefront.common.api'),
-                        description: 'Storefront API settings.',
+                        description: this.intl.t('storefront.sidebar.api-description'),
                         icon: 'code',
                         route: 'console.storefront.settings.api',
                         keywords: ['api', 'developer'],
                     },
                     {
                         label: this.intl.t('storefront.common.notification'),
-                        description: 'Notification channel settings.',
+                        description: this.intl.t('storefront.sidebar.notification-description'),
                         icon: 'bell-concierge',
                         route: 'console.storefront.settings.notifications',
                         keywords: ['push notifications', 'apn', 'fcm'],
@@ -180,7 +180,7 @@ export default class ApplicationController extends Controller {
             },
             {
                 label: this.intl.t('storefront.sidebar.launch-app'),
-                description: 'Open the storefront application repository.',
+                description: this.intl.t('storefront.sidebar.launch-app-description'),
                 icon: 'rocket',
                 url: 'https://github.com/fleetbase/storefront-app',
                 target: '_github',
@@ -256,7 +256,7 @@ export default class ApplicationController extends Controller {
     @action createNewStorefront() {
         return this.storefront.createNewStorefront({
             onSuccess: () => {
-                const loader = this.loader.show({ loadingMessage: 'Switching to newly created store...' });
+                const loader = this.loader.show({ loadingMessage: this.intl.t('storefront.sidebar.switching-to-new-store') });
 
                 this.hostRouter.refresh().then(() => {
                     this.notifyPropertyChange('activeStore');

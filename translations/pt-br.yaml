@@ -1,5 +1,75 @@
 storefront:
   extension-name: Storefront
+  extension:
+    description: "Gestão da loja on-line: produtos, pedidos, clientes e promoções."
+    shortcuts:
+      products:
+        title: "Produtos"
+        description: "Gerencie o catálogo de produtos, as categorias e o estoque."
+      orders:
+        title: "Pedidos"
+        description: "Visualize e atenda os pedidos recebidos pela vitrine."
+      customers:
+        title: "Clientes"
+        description: "Navegue e gerencie as contas de clientes da vitrine."
+      networks:
+        title: "Redes"
+        description: "Conecte e gerencie redes de várias lojas e marketplaces."
+      catalogs:
+        title: "Catálogos"
+        description: "Organize os produtos em catálogos compartilháveis."
+      promotions:
+        title: "Promoções"
+        description: "Crie notificações push e campanhas promocionais."
+    widgets:
+      key-metrics:
+        name: "Métricas da vitrine (legado)"
+        description: "Métricas agrupadas da vitrine (legado)."
+      kpi-revenue:
+        name: "Receita"
+        description: "Receita da vitrine no período atual, com tendência."
+      kpi-orders:
+        name: "Pedidos"
+        description: "Volume de pedidos no período atual, com tendência."
+      kpi-aov:
+        name: "Valor médio do pedido"
+        description: "Valor médio dos pedidos da vitrine não cancelados."
+      kpi-active-orders:
+        name: "Pedidos ativos"
+        description: "Pedidos em processo de atendimento."
+      kpi-completed-orders:
+        name: "Pedidos concluídos"
+        description: "Pedidos concluídos no período atual."
+      kpi-customers:
+        name: "Clientes"
+        description: "Clientes únicos que fizeram pedidos no período atual."
+      kpi-cart-conversion:
+        name: "Conversão de carrinho"
+        description: "Pedidos como porcentagem dos carrinhos criados no período atual."
+      kpi-cancellation-rate:
+        name: "Taxa de cancelamento"
+        description: "Pedidos cancelados como porcentagem do volume de pedidos do período atual."
+      revenue-trend:
+        name: "Tendência de receita"
+        description: "Receita e volume de pedidos ao longo do tempo."
+      top-products:
+        name: "Produtos mais vendidos"
+        description: "Produtos mais vendidos por receita."
+      orders:
+        name: "Pedidos da vitrine"
+        description: "Pedidos recentes da vitrine."
+      customer-insights:
+        name: "Insights de clientes"
+        description: "Proporção de clientes novos e recorrentes."
+      orders-by-status:
+        name: "Distribuição de status dos pedidos"
+        description: "Distribuição dos pedidos da vitrine por status."
+      metrics:
+        name: "Métricas da vitrine (legado)"
+        description: "Métricas de pedidos, clientes, lojas e ganhos da vitrine (legado)."
+      customers:
+        name: "Clientes da vitrine"
+        description: "Clientes recentes da vitrine."
   common:
     address: Endereço
     alerts: Alertas
@@ -85,6 +155,30 @@ storefront:
     promotions: Promoções
     settings: Configurações
     launch-app: Abrir App
+    dashboard-description: "Painel da vitrine e visão geral de vendas."
+    products-description: "Gerencie produtos, categorias, variações e complementos."
+    all-products: "Todos os produtos"
+    all-products-description: "Navegue e gerencie o estoque de produtos."
+    catalogs-description: "Crie e gerencie os catálogos da vitrine."
+    customers-description: "Consulte os clientes da vitrine e o histórico de pedidos."
+    orders-description: "Gerencie os pedidos recebidos pela vitrine."
+    networks-description: "Gerencie as redes de marketplace e as lojas participantes."
+    food-trucks-description: "Gerencie a localização e a disponibilidade dos food trucks."
+    promotions-description: "Descontos, códigos promocionais, segmentos de clientes e campanhas."
+    promotions-list-description: "Crie descontos e códigos promocionais aplicados no checkout."
+    campaigns-description: "Envie notificações agendadas para segmentos de clientes."
+    segments-description: "Agrupe clientes pelo histórico de pedidos para direcionamento."
+    push-notifications: "Notificações push"
+    push-notifications-description: "Envie notificações push para os clientes da vitrine."
+    settings-description: "Configure a vitrine, locais, gateways e notificações."
+    general-description: "Configurações gerais da vitrine."
+    location-description: "Locais de retirada e de atendimento da vitrine."
+    gateways-description: "Configurações de gateways de pagamento."
+    api-description: "Configurações da API da vitrine."
+    notification-description: "Configurações dos canais de notificação."
+    launch-app-description: "Abra o repositório do aplicativo da vitrine."
+    switching-to-new-store: "Mudando para a loja recém-criada..."
+    search-placeholder: "Pesquisar na vitrine..."
   component:
     storefront-order-summary:
       order-summary-title: Resumo do Pedido da Vitrine

@@ -1,5 +1,75 @@
 storefront:
   extension-name: Storefront
+  extension:
+    description: "Online store management: products, orders, customers, and promotions."
+    shortcuts:
+      products:
+        title: "Products"
+        description: "Manage your product catalogue, categories, and inventory."
+      orders:
+        title: "Orders"
+        description: "View and fulfil incoming storefront orders."
+      customers:
+        title: "Customers"
+        description: "Browse and manage your storefront customer accounts."
+      networks:
+        title: "Networks"
+        description: "Connect and manage multi-store networks and marketplaces."
+      catalogs:
+        title: "Catalogs"
+        description: "Organise products into shareable catalogs."
+      promotions:
+        title: "Promotions"
+        description: "Create push notifications and promotional campaigns."
+    widgets:
+      key-metrics:
+        name: "Storefront Metrics (Legacy)"
+        description: "Legacy grouped Storefront metrics."
+      kpi-revenue:
+        name: "Revenue"
+        description: "Storefront revenue for the current period with trend."
+      kpi-orders:
+        name: "Orders"
+        description: "Order volume for the current period with trend."
+      kpi-aov:
+        name: "Average Order Value"
+        description: "Average order value for non-canceled Storefront orders."
+      kpi-active-orders:
+        name: "Active Orders"
+        description: "Orders currently moving through fulfillment."
+      kpi-completed-orders:
+        name: "Completed Orders"
+        description: "Completed orders for the current period."
+      kpi-customers:
+        name: "Customers"
+        description: "Unique customers ordering during the current period."
+      kpi-cart-conversion:
+        name: "Cart Conversion"
+        description: "Orders as a percentage of carts created in the current period."
+      kpi-cancellation-rate:
+        name: "Cancellation Rate"
+        description: "Canceled orders as a percentage of current period order volume."
+      revenue-trend:
+        name: "Revenue Trend"
+        description: "Revenue and order volume over time."
+      top-products:
+        name: "Top Products"
+        description: "Best-selling products by revenue."
+      orders:
+        name: "Storefront Orders"
+        description: "Recent Storefront orders."
+      customer-insights:
+        name: "Customer Insights"
+        description: "New and returning customer mix."
+      orders-by-status:
+        name: "Order Status Mix"
+        description: "Distribution of Storefront orders by status."
+      metrics:
+        name: "Storefront Metrics (Legacy)"
+        description: "Legacy Storefront order, customer, store, and earnings metrics."
+      customers:
+        name: "Storefront Customers"
+        description: "Recent Storefront customers."
   common:
     address: Address
     alerts: Alerts
@@ -85,6 +155,30 @@ storefront:
     promotions: Promotions
     settings: Settings
     launch-app: Launch App
+    dashboard-description: "Storefront dashboard and sales overview."
+    products-description: "Manage products, categories, variants, and addons."
+    all-products: "All Products"
+    all-products-description: "Browse and manage product inventory."
+    catalogs-description: "Create and manage storefront catalogs."
+    customers-description: "Review storefront customers and order history."
+    orders-description: "Manage incoming storefront orders."
+    networks-description: "Manage marketplace networks and participating stores."
+    food-trucks-description: "Manage food truck locations and availability."
+    promotions-description: "Discounts, promo codes, customer segments and campaigns."
+    promotions-list-description: "Create discounts and promo codes applied at checkout."
+    campaigns-description: "Send scheduled notifications to customer segments."
+    segments-description: "Group customers by their order history for targeting."
+    push-notifications: "Push Notifications"
+    push-notifications-description: "Send push notifications to storefront customers."
+    settings-description: "Configure storefront settings, locations, gateways, and notifications."
+    general-description: "General storefront settings."
+    location-description: "Storefront pickup and service locations."
+    gateways-description: "Payment gateway settings."
+    api-description: "Storefront API settings."
+    notification-description: "Notification channel settings."
+    launch-app-description: "Open the storefront application repository."
+    switching-to-new-store: "Switching to newly created store..."
+    search-placeholder: "Search Storefront..."
   component:
     storefront-order-summary:
       order-summary-title: Storefront Order Summary
