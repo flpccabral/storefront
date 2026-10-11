@@ -15,7 +15,7 @@
                                 <div class="text-sm">{{n-a catalog.description}}</div>
                             </div>
                             <div>
-                                <Badge @status={{catalog.status}} @hideStatusDot={{true}} />
+                                <Badge @status={{catalog.status}} @text={{if catalog.status (t (concat "storefront.catalog-list.statuses." catalog.status))}} @hideStatusDot={{true}} />
                             </div>
                         </div>
                     </div>
@@ -37,6 +37,12 @@
                             @size="sm"
                         />
                     </div>
+                </div>
+            {{else}}
+                <div class="col-span-3 flex flex-col items-center justify-center py-16 text-center text-gray-500 dark:text-gray-400">
+                    <FaIcon @icon="book-open" @size="2x" class="mb-3" />
+                    <div class="text-sm font-semibold text-gray-700 dark:text-gray-200">{{t "storefront.catalog-list.empty.title"}}</div>
+                    <div class="mt-1 text-sm">{{t "storefront.catalog-list.empty.description"}}</div>
                 </div>
             {{/each}}
         </div>

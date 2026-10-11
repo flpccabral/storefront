@@ -1,23 +1,24 @@
 <Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}}>
     <div class="modal-body-container">
-        <InputGroup @name="Catalog Name" @value={{@options.catalog.name}} @disabled={{cannot "storefront create catalog"}} />
-        <InputGroup @name="Catalog Description" @value={{@options.catalog.description}} @disabled={{cannot "storefront create catalog"}} />
-        <InputGroup @name="Catalog Status">
+        <InputGroup @name={{t "storefront.catalog-list.catalog-name"}} @value={{@options.catalog.name}} @disabled={{cannot "storefront create catalog"}} />
+        <InputGroup @name={{t "storefront.catalog-list.catalog-description"}} @value={{@options.catalog.description}} @disabled={{cannot "storefront create catalog"}} />
+        <InputGroup @name={{t "storefront.catalog-list.catalog-status"}}>
             <Select
                 class="w-full"
                 @value={{@options.catalog.status}}
-                @placeholder="Select catalog status"
+                @placeholder={{t "storefront.catalog-list.select-catalog-status"}}
                 @options={{@options.statusOptions}}
+                @optionValue="value"
+                @optionLabel="label"
                 @onSelect={{fn (mut @options.catalog.status)}}
-                @humanize={{true}}
             />
         </InputGroup>
         <InputGroup>
             <div class="rounded-lg flex flex-col px-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <div class="mb-2 flex justify-between">
-                    <div class="text-sm font-semibold dark:text-gray-100">Product Catalog</div>
+                    <div class="text-sm font-semibold dark:text-gray-100">{{t "storefront.catalog-list.product-catalog"}}</div>
                     <div>
-                        <Button @icon="plus" @text="Add Catalog Category" @onClick={{@options.createCategory}} />
+                        <Button @icon="plus" @text={{t "storefront.catalog-list.add-category"}} @onClick={{@options.createCategory}} />
                     </div>
                 </div>
                 <div class="space-y-2">
@@ -35,12 +36,12 @@
                                     <Button
                                         @icon={{if category.expanded "compress" "expand"}}
                                         @onClick={{fn @options.toggleCategory category}}
-                                        @helpText="Collapse or expand category products"
+                                        @helpText={{t "storefront.catalog-list.toggle-category"}}
                                         @size="xs"
                                     />
-                                    <Button @icon="tags" @onClick={{fn @options.addProducts category}} @helpText="Manage category products" @size="xs" />
-                                    <Button @icon="pencil" @onClick={{fn @options.editCategory category}} @helpText="Edit category name" @size="xs" />
-                                    <Button @type="danger" @icon="trash" @onClick={{fn @options.deleteCategory category}} @helpText="Delete category" @size="xs" />
+                                    <Button @icon="tags" @onClick={{fn @options.addProducts category}} @helpText={{t "storefront.catalog-list.manage-category-products"}} @size="xs" />
+                                    <Button @icon="pencil" @onClick={{fn @options.editCategory category}} @helpText={{t "storefront.catalog-list.edit-category-name"}} @size="xs" />
+                                    <Button @type="danger" @icon="trash" @onClick={{fn @options.deleteCategory category}} @helpText={{t "storefront.catalog-list.delete-category"}} @size="xs" />
                                 </div>
                             </div>
                             {{#if category.expanded}}
@@ -52,16 +53,16 @@
                                                 @selected={{category.products}}
                                                 @optionLabel="name"
                                                 @comparator="name"
-                                                @selectionBoxLabel="Selected"
+                                                @selectionBoxLabel={{t "storefront.catalog-list.selected"}}
                                                 @onChange={{fn @options.confirmSelectedProducts category}}
                                             />
                                             <div class="mt-2">
-                                                <Button @icon="check" @type="primary" @text="Done" @onClick={{fn @options.finishAddingProducts category}} />
+                                                <Button @icon="check" @type="primary" @text={{t "storefront.catalog-list.done"}} @onClick={{fn @options.finishAddingProducts category}} />
                                             </div>
                                         </div>
                                     {{else}}
                                         <div class="flex flex-row mb-2">
-                                            <Button @icon="edit" @text="Edit Products" @onClick={{fn @options.addProducts category}} @size="xs" />
+                                            <Button @icon="edit" @text={{t "storefront.catalog-list.edit-products"}} @onClick={{fn @options.addProducts category}} @size="xs" />
                                         </div>
                                         <div class="grid grid-cols-4 gap-2">
                                             {{#each category.products as |product|}}
@@ -72,7 +73,7 @@
                                                         <div class="text-sm truncate dark:text-gray-200">{{n-a product.description}}</div>
                                                         <div class="text-sm dark:text-gray-200">{{format-currency product.price product.currency}}</div>
                                                         <div class="mt-2">
-                                                            <Button @type="danger" @icon="trash" @text="Remove" @onClick={{fn @options.removeProduct category product}} @size="xs" />
+                                                            <Button @type="danger" @icon="trash" @text={{t "storefront.catalog-list.remove"}} @onClick={{fn @options.removeProduct category product}} @size="xs" />
                                                         </div>
                                                     </div>
                                                 </div>

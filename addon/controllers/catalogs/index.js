@@ -14,7 +14,11 @@ export default class CatalogsIndexController extends Controller {
     queryParams = ['query'];
 
     @tracked query;
-    @tracked statusOptions = ['draft', 'published'];
+    @tracked statuses = ['draft', 'published'];
+
+    get statusOptions() {
+        return this.statuses.map((value) => ({ value, label: this.intl.t(`storefront.catalog-list.statuses.${value}`) }));
+    }
 
     @action createCatalog() {
         const catalog = this.store.createRecord('catalog', {
@@ -23,8 +27,8 @@ export default class CatalogsIndexController extends Controller {
         });
 
         return this.editCatalog(catalog, {
-            title: 'New Catalog',
-            acceptButtonText: 'Confirm',
+            title: this.intl.t('storefront.catalog-list.new-catalog'),
+            acceptButtonText: this.intl.t('storefront.catalog-list.confirm'),
             acceptButtonIcon: 'check',
             confirm: async (modal) => {
                 modal.startLoading();
@@ -32,7 +36,7 @@ export default class CatalogsIndexController extends Controller {
                 try {
                     await catalog.save();
                     this.hostRouter.refresh();
-                    this.notifications.success('New catalog created.');
+                    this.notifications.success(this.intl.t('storefront.catalog-list.created'));
                 } catch (error) {
                     this.notifications.serverError(error);
                 } finally {
@@ -46,8 +50,8 @@ export default class CatalogsIndexController extends Controller {
         const allProducts = this.store.query('product', { limit: -1 });
 
         this.modalsManager.show('modals/create-catalog', {
-            title: 'Edit Food Truck',
-            acceptButtonText: 'Save Changes',
+            title: this.intl.t('storefront.catalog-list.edit-catalog'),
+            acceptButtonText: this.intl.t('storefront.catalog-list.save-changes'),
             acceptButtonIcon: 'save',
             statusOptions: this.statusOptions,
             catalog,
@@ -77,16 +81,16 @@ export default class CatalogsIndexController extends Controller {
                 });
             },
             createCategory: () => {
-                const name = prompt('Enter category name');
+                const name = prompt(this.intl.t('storefront.catalog-list.enter-category-name'));
                 const category = this.store.createRecord('catalog-category', { name });
                 catalog.categories.pushObject(category);
             },
             editCategory: (category) => {
-                const name = prompt('Change category name', category.name);
+                const name = prompt(this.intl.t('storefront.catalog-list.change-category-name'), category.name);
                 category.set('name', name);
             },
             deleteCategory: async (category) => {
-                const confirmed = confirm('Delete this category?');
+                const confirmed = confirm(this.intl.t('storefront.catalog-list.delete-category-confirm'));
                 if (confirmed) {
                     category.set('deleting', true);
 
@@ -103,7 +107,7 @@ export default class CatalogsIndexController extends Controller {
                 try {
                     await catalog.save();
                     this.hostRouter.refresh();
-                    this.notifications.success('Changes to catalog saved.');
+                    this.notifications.success(this.intl.t('storefront.catalog-list.saved'));
                 } catch (error) {
                     this.notifications.serverError(error);
                 } finally {
